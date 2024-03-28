@@ -1,6 +1,9 @@
+import Footer from "@/components/Footer/Footer";
+import Header from "@/components/Header/Header";
+import SectionCarousel from "@/app/Carousel";
 import { Inter } from "next/font/google";
-import Header from "./components/header";
-import Footer from "./components/footer";
+import HeaderLinks from "@/components/Header/HeaderLinks.js";
+import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 // import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -14,7 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
+        <Header 
+          brand="EBike"
+          color="transparent"
+          changeColorOnScroll={{color: "white", height: 40}}
+          fixed
+          rightLinks={<HeaderLinks />}
+        />
+        <SectionCarousel /> 
           {children}
         <Footer />
         </body>
