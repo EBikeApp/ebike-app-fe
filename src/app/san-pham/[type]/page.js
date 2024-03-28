@@ -249,7 +249,7 @@ export default function ProductPage({ params }) {
   }, []);
   return (
     <div>
-      <ListProductsPage type={params.type} />
+      <ListProductsPage pathName={params.type} />
     </div>
   );
 }

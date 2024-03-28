@@ -1,8 +1,17 @@
+import Footer from "@/components/Footer/Footer";
+import Header from "@/components/Header/Header";
+import SectionCarousel from "@/app/Carousel";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Header from "./components/header";
-import Footer from "./components/footer";
+import HeaderLinks from "@/components/Header/HeaderLinks.js";
+import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
+// import "./globals.css";
+// import Header from "./components/header";
+// import Footer from "./components/footer";
 import ProductsCartProvider from "@/store/products-cart-context";
+import { Button } from "antd";
+import { UpCircleOutlined } from "@ant-design/icons";
+import ButtonForContact from "@/components/ButtonForContact/Button";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,11 +24,35 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ProductsCartProvider>
-          <Header />
-          {children}
-          <Footer />
-        </ProductsCartProvider>
+        <div className="bg-white">
+          <Header
+            brand="EBike"
+            color="transparent"
+            changeColorOnScroll={{ color: "white", height: 40 }}
+            fixed
+            rightLinks={<HeaderLinks />}
+          />
+          <SectionCarousel />
+          <ProductsCartProvider>
+            <Header />
+            <div className="min-h-[1000px]">
+              <Button
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="fixed bottom-5 right-5 bg-white border-2 border-gray-300 rounded-xl h-auto"
+              >
+                <UpCircleOutlined className="text-3xl" />
+              </Button>
+              <div className="fixed bottom-3 left-2">
+                <ButtonForContact />
+              </div>
+
+              {children}
+            </div>
+            <Footer />
+          </ProductsCartProvider>
+        </div>
       </body>
     </html>
   );

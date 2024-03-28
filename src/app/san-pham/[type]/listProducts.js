@@ -9,8 +9,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../config/firebase/firebase";
 import { Breadcrumb } from "antd";
 
-export default function ListProductsPage({ type }) {
-  // I design this component for general product page, becauz it's so bored to design 4 page for 4 product type =))
+export default function ListProductsPage({ pathName }) {
   const [isLoading, setIsLoading] = useState(true);
   const [productsFromDatabase, setProductsFromDatabase] = useState([]);
   const [listProduct, setListProduct] = useState([]);
@@ -25,6 +24,27 @@ export default function ListProductsPage({ type }) {
     label: "Giá",
     key: "default",
   });
+
+  const path = [
+    {
+      label: "xe-dap",
+      type: "bicycle",
+    },
+    {
+      label: "xe-dap-dien",
+      type: "eBike",
+    },
+    {
+      label: "xe-may-dien",
+      type: "eMotorbike",
+    },
+    {
+      label: "phu-kien",
+      type: "fitting",
+    },
+  ];
+
+  const type = path.filter((item) => item.label === pathName)[0].type;
 
   useEffect(() => {
     const getAllDocsFromDatabase = async (type) => {
