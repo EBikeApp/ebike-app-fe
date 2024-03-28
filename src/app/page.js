@@ -1,3 +1,18 @@
+"use client";
+
+import { useContext, useEffect } from "react";
+import "./globals.css";
+import { ProductsCartContext } from "@/store/products-cart-context";
 export default function Home() {
-  return <h1>Home</h1>
+  const { items } = useContext(ProductsCartContext);
+
+  useEffect(() => {
+    console.log(items);
+  }, []);
+
+  return (
+    <>
+      <div></div>
+    </>
+  );
 }
