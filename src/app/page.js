@@ -1,3 +1,5 @@
 export default function Home() {
-  return <h1>Home</h1>
+  return <div style={{height: 1000}}>
+    <h1>Home</h1>
+  </div>
 }
