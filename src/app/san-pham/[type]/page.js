@@ -241,15 +241,31 @@
 // };
 // export default ProductPage;
 "use client";
-import { useEffect } from "react";
+import Header from "@/components/Header/Header";
 import ListProductsPage from "./listProducts";
+import HeaderLinks from "@/components/Header/HeaderLinks";
+import { useEffect } from "react";
+import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
+
 export default function ProductPage({ params }) {
   useEffect(() => {
-    console.log(params.type);
-  }, []);
+    console.log(params);
+  });
   return (
     <div>
-      <ListProductsPage type={params.type} />
+      <div className="bg-white">
+        <Header
+          brand="EBike"
+          color="black"
+          changeColorOnScroll={{ color: "black", height: 40 }}
+          rightLinks={<HeaderLinks />}
+          fixed
+        />
+      </div>
+
+      <div className="pt-20">
+        <ListProductsPage typeProp={params} />
+      </div>
     </div>
   );
 }

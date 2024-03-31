@@ -9,6 +9,7 @@ const Product = ({ product, index }) => {
   };
   const pathname = usePathname();
   const router = useRouter();
+
   return (
     <div
       className="max-w-sm m-2 cursor-pointer"

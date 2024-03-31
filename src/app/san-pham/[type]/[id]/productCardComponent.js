@@ -25,10 +25,7 @@ function SampleNextArrow(props) {
 
 export default function ProductDetailCard({ Images, DiscountPercentage }) {
   const [currentImage, setCurrentImage] = useState(Images[0]);
-  // const testFunc = () => {
-  //   console.log("test");
-  //   setCurrentImage(Images[1]);
-  // };
+
   const settings = {
     infinite: true,
     customPaging: function (i) {
@@ -45,32 +42,6 @@ export default function ProductDetailCard({ Images, DiscountPercentage }) {
     slidesToShow: Images >= 4 ? 4 : Images.length,
     slidesToScroll: 1,
     arrows: true,
-    // responsive: [
-    //   {
-    //     breakpoint: 1024,
-    //     settings: {
-    //       slidesToShow: 3,
-    //       slidesToScroll: 3,
-    //       infinite: true,
-    //       dots: true,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 600,
-    //     settings: {
-    //       slidesToShow: 2,
-    //       slidesToScroll: 2,
-    //       initialSlide: 2,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 480,
-    //     settings: {
-    //       slidesToShow: 5,
-    //       slidesToScroll: 1,
-    //     },
-    //   },
-    // ],
   };
 
   const handleClick = (index) => {
