@@ -12,7 +12,11 @@ import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 import { Apps } from "@material-ui/icons";
+<<<<<<< Updated upstream
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+=======
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+>>>>>>> Stashed changes
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 
@@ -29,7 +33,15 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
+<<<<<<< Updated upstream
         <Link href="/" color="transparent" className={classes.navLink}>
+=======
+        <Link
+          href="/"
+          color="transparent"
+          className={classes.navLink}
+        >
+>>>>>>> Stashed changes
           TRANG CHỦ
         </Link>
       </ListItem>
@@ -40,13 +52,18 @@ export default function HeaderLinks(props) {
           buttonText="SẢN PHẨM"
           buttonProps={{
             className: classes.navLink,
+<<<<<<< Updated upstream
             color: "transparent",
+=======
+            color: "transparent"
+>>>>>>> Stashed changes
           }}
           buttonIcon={Apps}
           dropdownList={[
             <Link href="/san-pham">
               <div className={classes.dropdownLink}>Tất cả</div>
             </Link>,
+<<<<<<< Updated upstream
             <Link href="/san-pham/xe-dap">
               <div className={classes.dropdownLink}>Xe đạp</div>
             </Link>,
@@ -59,10 +76,16 @@ export default function HeaderLinks(props) {
             <Link href="/san-pham/phu-kien">
               <div className={classes.dropdownLink}>Phụ kiện</div>
             </Link>,
+=======
+            <Link href="/san-pham/xeDapDien">
+              <div className={classes.dropdownLink}>Xe đạp điện</div>
+            </Link>
+>>>>>>> Stashed changes
           ]}
         />
       </ListItem>
       <ListItem className={classes.listItem}>
+<<<<<<< Updated upstream
         <Link href="/gio-hang" color="transparent" className={classes.navLink}>
           <ShoppingCartIcon
             className={classes.icons}
@@ -71,6 +94,14 @@ export default function HeaderLinks(props) {
             }}
           />{" "}
           Giỏ hàng
+=======
+        <Link
+          href="/gio-hang"
+          color="transparent"
+          className={classes.navLink}
+        >
+          <ShoppingCartIcon className={classes.icons} /> Giỏ hàng
+>>>>>>> Stashed changes
         </Link>
       </ListItem>
     </List>
