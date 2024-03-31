@@ -1,1 +1,5 @@
-console.log('Hello, World!')  
+const obj = {
+  nguyen_minh_triet : 1,
+};
+
+console.log(obj)

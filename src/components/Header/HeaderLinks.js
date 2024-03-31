@@ -64,7 +64,13 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/gio-hang" color="transparent" className={classes.navLink}>
-          <ShoppingCartIcon className={classes.icons} /> Giỏ hàng
+          <ShoppingCartIcon
+            className={classes.icons}
+            style={{
+              maxWidth: "20px",
+            }}
+          />{" "}
+          Giỏ hàng
         </Link>
       </ListItem>
     </List>

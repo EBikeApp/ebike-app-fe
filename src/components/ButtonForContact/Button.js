@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import zaloLogo from "@/assest/images/zalo.png";
 import { PhoneOutlined } from "@ant-design/icons";
 import facebookLogo from "@/assest/images/facebook-svgrepo-com.svg";
+import zaloLogo from "../../assest/images/zalo.png"
 
 export default function ButtonForContact() {
   const [isClick, setIsClick] = useState(true);

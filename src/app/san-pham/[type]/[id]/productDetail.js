@@ -9,10 +9,8 @@ import { ProductsCartContext } from "@/store/products-cart-context";
 
 export default function ProductDetail({ productId }) {
   const { addToCart, items } = useContext(ProductsCartContext);
-  const [stateOfProduct, setStateOfProduct] = useState({
-    product: null,
-    url: "",
-  });
+
+  const [stateOfProduct, setStateOfProduct] = useState({ product: null });
 
   useEffect(() => {
     const getProduct = async (productId) => {
@@ -42,21 +40,13 @@ export default function ProductDetail({ productId }) {
     console.log(items);
   };
 
-  return !stateOfProduct.product ? (
-    <Spin
-      style={{
-        display: "block",
-        margin: "0 auto",
-        padding: "70px 100px",
-      }}
-    />
-  ) : (
+  return (
     <div className="">
       <div className="flex flex-col m-auto md:flex sm:flex-row ">
         <div className="w-auto flex justify-center ">
           <ProductDetailCard
-            Images={stateOfProduct?.product.thumbnail}
-            DiscountPercentage={stateOfProduct?.product.discountPercentage}
+            Images={stateOfProduct?.product?.thumbnail}
+            DiscountPercentage={stateOfProduct?.product?.discountPercentage}
           />
         </div>
         <div className="w-full sm:w-1/3 flex flex-col bg-[#cfcfcf2b] p-4">
@@ -65,7 +55,7 @@ export default function ProductDetail({ productId }) {
               <p className="">{stateOfProduct?.product.title}</p>
             </div>
             <div>
-              <p className="w-1/3 w-full text-2xl font-semibold overflow-visible font-normal ">
+              <p className="w-1/3 w-full text-2xl font-semibold overflow-visible">
                 Hãng: {stateOfProduct?.product.brand}
               </p>
             </div>

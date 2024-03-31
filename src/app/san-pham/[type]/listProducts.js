@@ -2,15 +2,14 @@
 
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { Dropdown, Slider, Pagination, Button, Space, Input } from "antd";
-import { Spin } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import Product from "../Product";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../config/firebase/firebase";
 import { Breadcrumb } from "antd";
 
-export default function ListProductsPage({ pathName }) {
-  const [isLoading, setIsLoading] = useState(true);
+export default function ListProductsPage({ typeProp }) {
+  // const [isLoading, setIsLoading] = useState(true);
   const [productsFromDatabase, setProductsFromDatabase] = useState([]);
   const [listProduct, setListProduct] = useState([]);
   const [priceFilter, setPriceFilter] = useState([0, 100]);
@@ -25,7 +24,28 @@ export default function ListProductsPage({ pathName }) {
     key: "default",
   });
 
-  const path = [
+  // const path = [
+  //   {
+  //     label: "xe-dap",
+  //     type: "bicycle",
+  //   },
+  //   {
+  //     label: "xe-dap-dien",
+  //     type: "eBike",
+  //   },
+  //   {
+  //     label: "xe-may-dien",
+  //     type: "eMotobike",
+  //   },
+  //   {
+  //     label: "phu-kien",
+  //     type: "fitting",
+  //   },
+  // ];
+  //
+  // const type = path.filter((item) => item.label === pathName)[0].type;
+
+  const [path, _] = useState([
     {
       label: "xe-dap",
       type: "bicycle",
@@ -36,27 +56,28 @@ export default function ListProductsPage({ pathName }) {
     },
     {
       label: "xe-may-dien",
-      type: "eMotorbike",
+      type: "eMotobike",
     },
     {
       label: "phu-kien",
       type: "fitting",
     },
-  ];
-
-  const type = path.filter((item) => item.label === pathName)[0].type;
+  ]);
+  const [type, setType] = useState("");
 
   useEffect(() => {
+    setType(path.find((item) => item.label === typeProp.type).type);
     const getAllDocsFromDatabase = async (type) => {
-      setIsLoading(true);
+      // setIsLoading(true);
       const q = query(collection(db, "products"), where("type", "==", type));
       const querySnapShot = await getDocs(q);
       const data = querySnapShot.docs.map((doc) => doc.data());
       return data;
+    
     };
     // this is the first time the component is mounted
     getAllDocsFromDatabase(type).then((data) => {
-      setIsLoading(false);
+      // setIsLoading(false);
       setProductsFromDatabase(data);
       setListProduct(data);
       setPageNumber(1);
@@ -66,7 +87,7 @@ export default function ListProductsPage({ pathName }) {
         key: "all",
       });
     });
-  }, [type]);
+  }, [type, typeProp]);
 
   // haven't done yet
   const onPagination = (pageNumber) => {
@@ -167,11 +188,8 @@ export default function ListProductsPage({ pathName }) {
     }),
     [priceFilter],
   );
-  return isLoading ? (
-    <div className="text-center h-full">
-      <Spin className="text-center p-7 m-7" />
-    </div>
-  ) : (
+
+  return (
     <div className="product-page-content">
       <Breadcrumb
         style={{

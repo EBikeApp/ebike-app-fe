@@ -4,7 +4,7 @@ import { ProductsCartContext } from "@/store/products-cart-context";
 import { Image, Button, Table, Card, Modal, Input, Form } from "antd";
 import { numberToVND } from "@/config/utils/common";
 
-export default function CartComponent  () {
+export default function CartComponent() {
   const { items, updateCart, pay } = useContext(ProductsCartContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const customerNameRef = useRef("");
@@ -36,18 +36,6 @@ export default function CartComponent  () {
       dataIndex: "product",
       key: "product",
     },
-
-    // {
-    //   title: "ĐƠN GIÁ",
-    //   key: "price",
-    //   dataIndex: "price",
-    // },
-
-    // {
-    //   title: "SỐ LƯỢNG",
-    //   key: "quantity",
-    //   dataIndex: "quantity",
-    // },
     {
       title: "THÀNH TIỀN",
       key: "total",
@@ -239,5 +227,4 @@ export default function CartComponent  () {
       </Card>
     </>
   );
-};
-
+}

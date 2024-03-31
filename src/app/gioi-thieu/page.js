@@ -1,7 +1,10 @@
 "use client";
 import { useEffect } from "react";
-import Hihi from "./test";
 import { useSearchParams } from "next/navigation";
+import Header from "@/components/Header/Header";
+import HeaderLinks from "@/components/Header/HeaderLinks";
+import "../globals.css"
+import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 export default function Home() {
   // how to get all params of endpoint
   const searchParams = useSearchParams();
@@ -10,8 +13,14 @@ export default function Home() {
   });
   return (
     <>
+      <Header
+        brand="EBike"
+        color="black"
+        rightLinks={<HeaderLinks />}
+        changeColorOnScroll={{ color: "white", height: 40 }}
+        fixed
+      />
       <h1>Giới thiệu</h1>
-      <Hihi />
     </>
   );
 }
