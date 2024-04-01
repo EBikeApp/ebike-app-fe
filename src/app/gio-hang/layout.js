@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-import Loading from "../san-pham/[type]/loading";
 import "../globals.css";
 import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 
@@ -9,9 +7,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return (
-    <Suspense fallback={<Loading />}>
-      <div>{children}</div>
-    </Suspense>
-  );
+  return <div>{children}</div>;
 }

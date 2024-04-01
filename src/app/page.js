@@ -1,28 +1,18 @@
 "use client";
-import { useContext, useEffect } from "react";
-import "./globals.css";
-import { ProductsCartContext } from "@/store/products-cart-context";
 import SectionCarousel from "./components/Carousel";
-import Header from "@/components/Header/Header";
-import HeaderLinks from "@/components/Header/HeaderLinks";
-
+import dynamic from "next/dynamic";
 export default function Home() {
-  const { items } = useContext(ProductsCartContext);
-
-  useEffect(() => {
-    console.log(items);
-  }, []);
+  const HeaderComponent = dynamic(
+    () => import("@/app/components/headerForRootPage"),
+    {
+      ssr: false,
+    },
+  );
 
   return (
     <>
       <SectionCarousel />
-      <Header
-        brand="EBike"
-        color="transparent"
-        changeColorOnScroll={{ color: "white", height: 40 }}
-        fixed
-        rightLinks={<HeaderLinks />}
-      />
+      <HeaderComponent />
       <div className="">hihi</div>
     </>
   );

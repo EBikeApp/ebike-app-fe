@@ -1,14 +1,8 @@
 import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import HeaderLinks from "@/components/Header/HeaderLinks.js";
 import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 import ProductsCartProvider from "@/store/products-cart-context";
-import { UpCircleOutlined } from "@ant-design/icons";
-import ButtonForContact from "@/components/ButtonForContact/Button";
-import { Suspense } from "react";
-import Loading from "./san-pham/[type]/loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,14 +15,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Suspense fallback={<Loading />}>
-          <div className="bg-white">
-            <ProductsCartProvider>
-              <div className="min-h-[1000px]">{children}</div>
-              <Footer />
-            </ProductsCartProvider>
-          </div>
-        </Suspense>
+        <div className="bg-white">
+          <ProductsCartProvider>
+            <div className="min-h-[1000px]">{children}</div>
+            <Footer />
+          </ProductsCartProvider>
+        </div>
       </body>
     </html>
   );

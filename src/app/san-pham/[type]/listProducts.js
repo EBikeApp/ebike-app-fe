@@ -4,46 +4,40 @@ import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { Dropdown, Slider, Pagination, Button, Space, Input } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import Product from "../Product";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../../../config/firebase/firebase";
 import { Breadcrumb } from "antd";
+import SidebarForFilter from "@/app/components/sidebarForFilter";
 
 export default function ListProductsPage({ typeProp }) {
-  // const [isLoading, setIsLoading] = useState(true);
   const [productsFromDatabase, setProductsFromDatabase] = useState([]);
   const [listProduct, setListProduct] = useState([]);
   const [priceFilter, setPriceFilter] = useState([0, 100]);
-  const [pageNumber, setPageNumber] = useState(1);
   const [selectedType, setSelectedType] = useState({
     label: "Tất cả",
     key: "all",
   });
 
+  const [pageNumber, setPageNumber] = useState(1);
+
   const [selectedAscOrDesc, setSelectedAscOrDesc] = useState({
     label: "Giá",
     key: "default",
   });
+  const [scopeProducts, setScopeProducts] = useState({
+    start: 0,
+    end: 10,
+  });
 
-  // const path = [
-  //   {
-  //     label: "xe-dap",
-  //     type: "bicycle",
-  //   },
-  //   {
-  //     label: "xe-dap-dien",
-  //     type: "eBike",
-  //   },
-  //   {
-  //     label: "xe-may-dien",
-  //     type: "eMotobike",
-  //   },
-  //   {
-  //     label: "phu-kien",
-  //     type: "fitting",
-  //   },
-  // ];
-  //
-  // const type = path.filter((item) => item.label === pathName)[0].type;
+  const [brand, setBrand] = useState("ASAMA");
+  const [rangePrice, setRangePrice] = useState([0, 100]);
 
   const [path, _] = useState([
     {
@@ -73,13 +67,12 @@ export default function ListProductsPage({ typeProp }) {
       const querySnapShot = await getDocs(q);
       const data = querySnapShot.docs.map((doc) => doc.data());
       return data;
-    
     };
     // this is the first time the component is mounted
     getAllDocsFromDatabase(type).then((data) => {
       // setIsLoading(false);
       setProductsFromDatabase(data);
-      setListProduct(data);
+      setListProduct([...data.slice(0, 10)]);
       setPageNumber(1);
       setPriceFilter([0, 100]);
       setSelectedType({
@@ -90,9 +83,23 @@ export default function ListProductsPage({ typeProp }) {
   }, [type, typeProp]);
 
   // haven't done yet
-  const onPagination = (pageNumber) => {
+  const onPagination = (pageNumber, pageSize) => {
     setPageNumber(pageNumber);
-    console.log(pageNumber);
+    if (pageNumber * 10 > productsFromDatabase.length) {
+      setScopeProducts({
+        start: (pageNumber - 1) * 10,
+        end: productsFromDatabase.length,
+      });
+    } else {
+      setScopeProducts({
+        start: (pageNumber - 1) * 10,
+        end: pageNumber * 10,
+      });
+    }
+
+    setListProduct([
+      ...productsFromDatabase.slice(scopeProducts.start, scopeProducts.end + 1),
+    ]);
   };
 
   const handleMenuClickForBrandSearching = useCallback((e) => {
@@ -115,7 +122,12 @@ export default function ListProductsPage({ typeProp }) {
 
   const onSliderChange = (value) => {
     if (value[0] === 0) {
-      setListProduct([...productsFromDatabase]);
+      setListProduct([
+        ...productsFromDatabase.slice(
+          scopeProducts.start,
+          scopeProducts.end + 1,
+        ),
+      ]);
     } else {
       const currentListProduct = listProduct.filter(
         (product) =>
@@ -189,6 +201,27 @@ export default function ListProductsPage({ typeProp }) {
     [priceFilter],
   );
 
+  const getData = async () => {
+    try {
+      const q = query(
+        collection(db, "products"),
+        where("type", "==", type),
+        brand === "all" ? null : where("brand", "==", brand),
+        limit(10),
+      );
+      const querySnapShot = await getDocs(q);
+
+      const data = querySnapShot.docs.map((doc) => doc.data());
+      return data;
+    } catch (error) {
+      console.error("Error getting documents: ", error);
+    }
+  };
+
+  useEffect(() => {
+    getData().then((data) => console.log(data));
+  });
+
   return (
     <div className="product-page-content">
       <Breadcrumb
@@ -227,16 +260,19 @@ export default function ListProductsPage({ typeProp }) {
             defaultValue={[0, 100]}
             className="w-full md:w-1/4 mx-4"
           />
-          <Input.Search
-            className="w-full md:w-1/4 mx-3"
-            placeholder="Nhập tên sản phẩm..."
-            onSearch={onSearch}
-            onChange={(e) => {
-              if (e.target.value === "") {
-                setListProduct([...productsFromDatabase]);
-              }
-            }}
-          />
+          <div className="flex justify-center self-center sm:flex-col ">
+            <SidebarForFilter />
+            <Input.Search
+              className="w-full md:w-1/4 mx-3"
+              placeholder="Nhập tên sản phẩm..."
+              onSearch={onSearch}
+              onChange={(e) => {
+                if (e.target.value === "") {
+                  setListProduct([...productsFromDatabase]);
+                }
+              }}
+            />
+          </div>
         </div>
         <br />
         <div className="flex flex-wrap justify-center">
@@ -248,24 +284,26 @@ export default function ListProductsPage({ typeProp }) {
             listProduct.map((product, index) => {
               return (
                 <div key={index} className="duration-200">
-                  <Product
-                    product={product}
-                    index={index}
-                    // url={type}
-                    key={index}
-                  />
+                  <Product product={product} index={index} key={index} />
                 </div>
               );
             })
           )}
         </div>
-
-        <Pagination
-          current={pageNumber}
-          onChange={onPagination}
-          total={1}
-          style={{ textAlign: "center" }}
-        />
+        <br />
+        <div className="text-center">
+          <Pagination
+            defaultCurrent={1}
+            pageSize={
+              productsFromDatabase.length % 10 === 0
+                ? productsFromDatabase.length / 10
+                : Math.floor(productsFromDatabase.length / 10) + 1
+            }
+            current={pageNumber}
+            total={productsFromDatabase.length}
+            onChange={onPagination}
+          />
+        </div>
       </div>
     </div>
   );

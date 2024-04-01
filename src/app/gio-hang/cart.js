@@ -32,7 +32,7 @@ export default function CartComponent() {
 
   const columns = [
     {
-      title: "Sản Phẩm",
+      title: "SẢN PHẨM",
       dataIndex: "product",
       key: "product",
     },

@@ -1,11 +1,13 @@
-import { Suspense } from "react";
-import Loading from "./[type]/loading";
+import dynamic from "next/dynamic";
 
 export default function Layout({ children }) {
+  const HeaderComponent = dynamic(() => import("@/app/components/header"), {
+    ssr: false,
+  });
   return (
-  
-    <Suspense fallback={<Loading />}>
-      <div className="w-5/6 m-auto">{children}</div>;
-    </Suspense>
+    <div>
+      <HeaderComponent />
+      <div className="w-5/6 m-auto">{children}</div>
+    </div>
   );
 }
