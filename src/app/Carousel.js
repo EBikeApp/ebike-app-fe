@@ -26,8 +26,7 @@ return (
                 />
                 <div className="slick-caption">
                     <h4>
-                        <LocationOn className="slick-icons" />Yellowstone
-                        National Park, United States
+                        <LocationOn className="slick-icons" />17 Lê Văn Ninh, phường Trường Thọ, Tp.Thủ Đức, Tp.Hồ Chí Minh
                     </h4>
                 </div>
             </div>
@@ -39,8 +38,7 @@ return (
                 />
                 <div className="slick-caption">
                     <h4>
-                        <LocationOn className="slick-icons" />Somewhere Beyond,
-                        United States
+                        <LocationOn className="slick-icons" />40 Đỗ Xuân Hợp, phường Phước Long B, Tp.Thủ Đức, Tp.Hồ Chí Minh
                     </h4>
                 </div>
             </div>
@@ -52,8 +50,19 @@ return (
                 />
                 <div className="slick-caption">
                     <h4>
-                        <LocationOn className="slick-icons" />Yellowstone
-                        National Park, United States
+                        <LocationOn className="slick-icons" />76 Quốc lộ 1K, phường Linh Xuân, Tp.Thủ Đức, Tp.Hồ Chí Minh
+                    </h4>
+                </div>
+            </div>
+            <div>
+                <img
+                    src="https://demos.creative-tim.com/nextjs-material-kit/img/bg3.jpg"
+                    alt="Third slide"
+                    className="slick-image"
+                />
+                <div className="slick-caption">
+                    <h4>
+                        <LocationOn className="slick-icons" />238 GS1, Dĩ An, Bình Dương
                     </h4>
                 </div>
             </div>

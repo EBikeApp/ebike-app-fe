@@ -54,6 +54,18 @@ const footerStyle = {
     height: "18px",
     position: "relative",
     top: "3px"
+  },
+  navPillContent: {
+    paddingTop: '30px',
+    marginBottom: '50px',
+    textAlign: 'left',
+    "& div.MuiGrid-item": {
+      paddingLeft: '25px',
+      paddingRight: '15px',
+    }
+  },
+  gridItemLeft: {
+    borderRight: '1px solid #3c4858'
   }
 };
 export default footerStyle;

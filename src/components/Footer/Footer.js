@@ -6,14 +6,20 @@ import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // material-ui core components
-import { List, ListItem, Grid } from "@material-ui/core";
+import { List, ListItem, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import NavPills from "@/components/NavPills/NavPills.js";
 
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
+import ContactSupportIcon from '@material-ui/icons/ContactSupport';
+import BusinessIcon from '@material-ui/icons/Business';
+import PhoneIcon from '@material-ui/icons/Phone';
+import EmailIcon from '@material-ui/icons/Email';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 import styles from "@/styles/jss/nextjs-material-kit/components/footerStyle.js";
+import GridContainer from "../Grid/GridContainer";
 
 const useStyles = makeStyles(styles);
 
@@ -28,67 +34,71 @@ export default function Footer(props) {
     [classes.a]: true,
     [classes.footerWhiteFont]: whiteFont
   });
+
   return (
     <footer className={footerClasses}>
       <div className={classes.container}>
         <div>
         <NavPills
-          color="primary"
+          color="inherit"
+          horizontal={{
+            tabsGrid: {xs: 4,  sm: 4, md: 4 },
+            contentGrid: { xs: 8, sm: 8, md: 8 }
+          }}
           tabs={[
             {
               tabButton: "THÔNG TIN LIÊN HỆ",
+              tabIcon: ContactSupportIcon,
               tabContent: (
-                <span>
-                  <p>
-                    Collaboratively administrate empowered markets via
-                    plug-and-play networks. Dynamically procrastinate
-                    B2C users after installed base benefits.
-                  </p>
-                  <br />
-                  <p>
-                    Dramatically visualize customer directed convergence
-                    without revolutionary ROI. Collaboratively
-                    administrate empowered markets via plug-and-play
-                    networks. Dynamically procrastinate B2C users after
-                    installed base benefits.
-                  </p>
-                  <br />
-                  <p>This is very nice.</p>
-                </span>
-              )
-            },
+                <GridContainer className={classes.navPillContent}>
+                  <Grid item xs={12} sm={6} md={6} className={classes.gridItemLeft}>
+                    <p>
+                      <PhoneIcon color="primary"/>
+                      &emsp;
+                      +84 0333 879 987
+                    </p>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <p>
+                      <EmailIcon color="primary"/> 
+                      &emsp;
+                      milo.nhantran@gmail.com
+                    </p>
+                  </Grid>
+                </GridContainer>
+              ),
+            }
+          ]}
+        />
+        <NavPills
+          color="inherit"
+          horizontal={{
+            tabsGrid: {xs: 4,  sm: 4, md: 4 },
+            contentGrid: { xs: 8, sm: 8, md: 8 }
+          }}
+          tabs={[
             {
               tabButton: "ĐỊA CHỈ",
+              tabIcon: BusinessIcon,
               tabContent: (
-                <span>
-                  <p>
-                    Efficiently unleash cross-media information without
-                    cross-media value. Quickly maximize timely
-                    deliverables for real-time schemas.
-                  </p>
-                  <br />
-                  <p>
-                    Dramatically maintain clicks-and-mortar solutions
-                    without functional solutions.
-                  </p>
-                </span>
-              )
-            },
-            {
-              tabButton: "Options",
-              tabContent: (
-                <span>
-                  <p>
-                    Completely synergize resource taxing relationships
-                    via premier niche markets. Professionally cultivate
-                    one-to-one customer service with robust ideas.{" "}
-                  </p>
-                  <br />
-                  <p>
-                    Dynamically innovate resource-leveling customer
-                    service for state of the art customer service.
-                  </p>
-                </span>
+                <GridContainer className={classes.navPillContent}>
+                  <Grid item xs={12} sm={6} md={6} className={classes.gridItemLeft}>
+                    <p>
+                      <LocationOnIcon color="primary"/>
+                    &emsp; 99/1/19 Lê Văn Ninh, phường Linh Trung, thành phố Thủ Đức
+                    </p>
+                    <p>
+                      <LocationOnIcon color="primary"/>
+                    &emsp; 99/1/19 Lê Văn Ninh, phường Linh Trung, thành phố Thủ Đức
+                    </p>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <p>
+                      <LocationOnIcon color="primary"/>
+                      &emsp; 99/1/19 Lê Văn Ninh, phường Linh Trung, thành phố Thủ Đức
+                    </p>
+                  </Grid>
+                </GridContainer>
               )
             }
           ]}
