@@ -23,12 +23,13 @@ export default function SidebarForFilter() {
           <p className="font-medium w-6">Lọc</p>
         </div>
       </div>
+  <div className="w-[90%]">
       <Drawer
         title="Bộ Lọc Tìm Kiếm"
         placement={placement}
-        width="90%"
         // i want to set margin top
         // style={{ marginTop: "75px" }}
+        style={{width: "90%"}}
         onClose={onClose}
         zIndex={10000}
         open={open}
@@ -40,11 +41,16 @@ export default function SidebarForFilter() {
             </Button>
           </Space>
         }
-      >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Drawer>
+      ></Drawer>
+      </div>
+    </div>
+  );
+}
+
+function ButtonInDrawer() {
+  return (
+    <div>
+      <Button>Button in Drawer</Button>
     </div>
   );
 }

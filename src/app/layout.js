@@ -3,7 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 import ProductsCartProvider from "@/store/products-cart-context";
-
+import dynamic from "next/dynamic";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -12,10 +12,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const HeaderComponent = dynamic(() => import("@/app/components/header"), {
+    ssr: false,
+  });
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-white">
+          <HeaderComponent />
           <ProductsCartProvider>
             <div className="min-h-[1000px]">{children}</div>
             <Footer />

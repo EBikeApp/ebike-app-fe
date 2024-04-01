@@ -1,5 +1,3 @@
-import "../globals.css";
-import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 
 export const metadata = {
   title: "Next.js",
