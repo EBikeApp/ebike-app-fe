@@ -1,10 +1,8 @@
-"use client";
-
-import CartComponent from "./cart";
+import CartComponent from "@/components/Cart/CartComponent";
 
 export default function CartPage() {
   return (
-    <div className="pt-20">
+    <div>
       <CartComponent />
     </div>
   );

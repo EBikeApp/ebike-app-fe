@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useCallback, useMemo, useEffect } from "react";
-import { Dropdown, Slider, Pagination, Button, Space, Input } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-import Product from "../Product";
+// import { Dropdown, Slider, Pagination, Button, Space, Input } from "antd";
+// import { DownOutlined } from "@ant-design/icons";
+import Product from "@/components/ProductComponent/Product";
 import {
   collection,
   getDocs,
@@ -12,10 +12,10 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { db } from "../../../config/firebase/firebase";
-import { Breadcrumb } from "antd";
-import SidebarForFilter from "@/app/components/sidebarForFilter";
-import Example from "@/app/components/sidebarForFilter";
+import { db } from "@/config/firebase/firebase";
+// import { Breadcrumb } from "antd";
+// import SidebarForFilter from "@/components/sidebarForFilter";
+import Example from "@/components/sidebarForFilter";
 
 export default function ListProductsPage({ typeProp }) {
   const [productsFromDatabase, setProductsFromDatabase] = useState([]);
@@ -114,7 +114,7 @@ export default function ListProductsPage({ typeProp }) {
       setListProduct([...productsFromDatabase]);
     } else {
       const filterProducts = productsFromDatabase.filter(
-        (product) => product.brand === selected.key,
+        (product) => product.brand === selected.key
       );
       setPriceFilter([0, 100]);
       setListProduct([...filterProducts]);
@@ -126,14 +126,14 @@ export default function ListProductsPage({ typeProp }) {
       setListProduct([
         ...productsFromDatabase.slice(
           scopeProducts.start,
-          scopeProducts.end + 1,
+          scopeProducts.end + 1
         ),
       ]);
     } else {
       const currentListProduct = listProduct.filter(
         (product) =>
           product.price <= value[1] * 1000000 &&
-          product.price >= value[0] * 1000000,
+          product.price >= value[0] * 1000000
       );
       setListProduct([...currentListProduct]);
     }
@@ -141,7 +141,7 @@ export default function ListProductsPage({ typeProp }) {
 
   const onSearch = (value) => {
     const currentListProduct = productsFromDatabase.filter((product) =>
-      product.title.toLowerCase().includes(value.toLowerCase()),
+      product.title.toLowerCase().includes(value.toLowerCase())
     );
     setListProduct([...currentListProduct]);
   };
@@ -199,7 +199,7 @@ export default function ListProductsPage({ typeProp }) {
       [priceFilter[0]]: `${priceFilter[0]}triệu`,
       [priceFilter[1]]: `${priceFilter[1]}triệu`,
     }),
-    [priceFilter],
+    [priceFilter]
   );
 
   const getData = async () => {
@@ -208,7 +208,7 @@ export default function ListProductsPage({ typeProp }) {
         collection(db, "products"),
         where("type", "==", type),
         brand === "all" ? null : where("brand", "==", brand),
-        limit(10),
+        limit(10)
       );
       const querySnapShot = await getDocs(q);
 
@@ -223,97 +223,113 @@ export default function ListProductsPage({ typeProp }) {
     getData().then((data) => console.log(data));
   });
 
+  // return (
+  // <div className="product-page-content">
+  //   <Breadcrumb
+  //     style={{
+  //       margin: "16px 0",
+  //     }}
+  //   >
+  //     <Breadcrumb.Item>Sản phẩm</Breadcrumb.Item>
+  //     <Breadcrumb.Item>Xe đạp</Breadcrumb.Item>
+  //   </Breadcrumb>
+  //   <div className="filter-criteria">
+  //     <div className="flex flex-wrap justify-between gap-4 ">
+  //       <Dropdown menu={menuProps} className="mx-4">
+  //         <Button>
+  //           <Space>
+  //             {selectedType.label} <DownOutlined />
+  //           </Space>
+  //         </Button>
+  //       </Dropdown>
+  //       <Dropdown menu={ascOrDescProps} className="mx-4">
+  //         <Button>
+  //           <Space>
+  //             {selectedAscOrDesc.label} <DownOutlined />
+  //           </Space>
+  //         </Button>
+  //       </Dropdown>
+  //       <Slider
+  //         min={0}
+  //         max={100}
+  //         onChange={(value) => {
+  //           onSliderChange(value);
+  //         }}
+  //         marks={sliderMarks}
+  //         step={2}
+  //         range
+  //         defaultValue={[0, 100]}
+  //         className="w-full md:w-1/4 mx-4"
+  //       />
+  //       <div className="flex justify-center self-center sm:flex-col ">
+  //         <SidebarForFilter />
+  //         <Input.Search
+  //           className="w-full md:w-1/4 mx-3"
+  //           placeholder="Nhập tên sản phẩm..."
+  //           onSearch={onSearch}
+  //           onChange={(e) => {
+  //             if (e.target.value === "") {
+  //               setListProduct([...productsFromDatabase]);
+  //             }
+  //           }}
+  //         />
+  //       </div>
+  //     </div>
+  //     <br />
+  //     <div className="flex flex-wrap justify-center">
+  //       {!productsFromDatabase.length ? (
+  //         <div className="text-center">
+  //           <p>Không có sản phẩm nào</p>
+  //         </div>
+  //       ) : (
+  //         listProduct.map((product, index) => {
+  //           return (
+  //             <div key={index} className="duration-200">
+  //               <Product product={product} index={index} key={index} />
+  //             </div>
+  //           );
+  //         })
+  //       )}
+  //     </div>
+  //     <br />
+  //     <div className="text-center">
+  //       <Pagination
+  //         defaultCurrent={1}
+  //         pageSize={
+  //           productsFromDatabase.length % 10 === 0
+  //             ? productsFromDatabase.length / 10
+  //             : Math.floor(productsFromDatabase.length / 10) + 1
+  //         }
+  //         current={pageNumber}
+  //         total={productsFromDatabase.length}
+  //         onChange={onPagination}
+  //       />
+  //     </div>
+  //   </div>
+  // </div>
+
+  // );
+
   return (
-    //   <div className="product-page-content">
-    //     <Breadcrumb
-    //       style={{
-    //         margin: "16px 0",
-    //       }}
-    //     >
-    //       <Breadcrumb.Item>Sản phẩm</Breadcrumb.Item>
-    //       <Breadcrumb.Item>Xe đạp</Breadcrumb.Item>
-    //     </Breadcrumb>
-    //     <div className="filter-criteria">
-    //       <div className="flex flex-wrap justify-between gap-4 ">
-    //         <Dropdown menu={menuProps} className="mx-4">
-    //           <Button>
-    //             <Space>
-    //               {selectedType.label} <DownOutlined />
-    //             </Space>
-    //           </Button>
-    //         </Dropdown>
-    //         <Dropdown menu={ascOrDescProps} className="mx-4">
-    //           <Button>
-    //             <Space>
-    //               {selectedAscOrDesc.label} <DownOutlined />
-    //             </Space>
-    //           </Button>
-    //         </Dropdown>
-    //         <Slider
-    //           min={0}
-    //           max={100}
-    //           onChange={(value) => {
-    //             onSliderChange(value);
-    //           }}
-    //           marks={sliderMarks}
-    //           step={2}
-    //           range
-    //           defaultValue={[0, 100]}
-    //           className="w-full md:w-1/4 mx-4"
-    //         />
-    //         <div className="flex justify-center self-center sm:flex-col ">
-    //           <SidebarForFilter />
-    //           <Input.Search
-    //             className="w-full md:w-1/4 mx-3"
-    //             placeholder="Nhập tên sản phẩm..."
-    //             onSearch={onSearch}
-    //             onChange={(e) => {
-    //               if (e.target.value === "") {
-    //                 setListProduct([...productsFromDatabase]);
-    //               }
-    //             }}
-    //           />
-    //         </div>
-    //       </div>
-    //       <br />
-    //       <div className="flex flex-wrap justify-center">
-    //         {!productsFromDatabase.length ? (
-    //           <div className="text-center">
-    //             <p>Không có sản phẩm nào</p>
-    //           </div>
-    //         ) : (
-    //           listProduct.map((product, index) => {
-    //             return (
-    //               <div key={index} className="duration-200">
-    //                 <Product product={product} index={index} key={index} />
-    //               </div>
-    //             );
-    //           })
-    //         )}
-    //       </div>
-    //       <br />
-    //       <div className="text-center">
-    //         <Pagination
-    //           defaultCurrent={1}
-    //           pageSize={
-    //             productsFromDatabase.length % 10 === 0
-    //               ? productsFromDatabase.length / 10
-    //               : Math.floor(productsFromDatabase.length / 10) + 1
-    //           }
-    //           current={pageNumber}
-    //           total={productsFromDatabase.length}
-    //           onChange={onPagination}
-    //         />
-    //       </div>
-    //     </div>
-    //   </div>
-    // );
-    listProduct.map((product, index) => {
-      return (
-        <div key={index} className="duration-200">
-          <Product product={product} index={index} key={index} />
-        </div>
-      );
-    })
+    <Example
+      brands={[
+        {
+          brand: "ASAMA",
+        },
+        {
+          brand: "THỂ THAO",
+        },
+      ]}
+    >
+      <div className="flex flex-wrap justify-center">
+        {listProduct.map((product, index) => {
+          return (
+            <div key={index} className="duration-200">
+              <Product product={product} index={index} key={index} />
+            </div>
+          );
+        })}
+      </div>
+    </Example>
   );
 }

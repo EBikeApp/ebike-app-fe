@@ -1,4 +1,5 @@
 export const numberToVND = (num) => {
+  num = num || 0;
   const stringValue = num.toString();
   let result = "";
   for (let i = 1; i <= stringValue.length; i++) {

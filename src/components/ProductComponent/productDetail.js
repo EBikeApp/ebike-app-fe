@@ -65,7 +65,7 @@ export default function ProductDetail({ productId }) {
                   stateOfProduct?.product.price +
                     (stateOfProduct?.product.price *
                       stateOfProduct?.product.discountPercentage) /
-                      100,
+                      100
                 )}
               </p>
             )}

@@ -1,8 +1,7 @@
-"use client";
+import { numberToVND } from "@/config/utils/common";
 import React, { useContext, useRef, useState } from "react";
 import { ProductsCartContext } from "@/store/products-cart-context";
 import { Image, Button, Table, Card, Modal, Input, Form } from "antd";
-import { numberToVND } from "@/config/utils/common";
 
 export default function CartComponent() {
   const { items, updateCart, pay } = useContext(ProductsCartContext);
@@ -66,7 +65,7 @@ export default function CartComponent() {
               <p className=" line-through text-gray-700 -mt-1">
                 {numberToVND(
                   product.price +
-                    (product.price * product.discountPercentage) / 100,
+                    (product.price * product.discountPercentage) / 100
                 )}
               </p>
             )}
@@ -156,14 +155,14 @@ export default function CartComponent() {
             if (
               !customerNameRef.current.input?.value.trim() ||
               !checkNumberPhoneIsValid(
-                customerNumberPhoneRef.current.input?.value.trim(),
+                customerNumberPhoneRef.current.input?.value.trim()
               )
             ) {
               alert("Xin mời nhập đầy đủ thông tin!");
             } else {
               pay(
                 customerNameRef.current.input.value.trim(),
-                customerNumberPhoneRef.current.input?.value.trim(),
+                customerNumberPhoneRef.current.input?.value.trim()
               );
               handleOk();
             }
@@ -214,7 +213,7 @@ export default function CartComponent() {
                       return Promise.resolve();
                     }
                     return Promise.reject(
-                      new Error("Số điện thoại không hợp lệ!"),
+                      new Error("Số điện thoại không hợp lệ!")
                     );
                   },
                 },
