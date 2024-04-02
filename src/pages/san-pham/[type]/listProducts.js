@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../config/firebase/firebase";
 import { Breadcrumb } from "antd";
-import SidebarForFilter from "@/app/components/sidebarForFilter";
+import SidebarForFilter from "@/pages/components/sidebarForFilter";
 
 export default function ListProductsPage({ typeProp }) {
   const [productsFromDatabase, setProductsFromDatabase] = useState([]);
