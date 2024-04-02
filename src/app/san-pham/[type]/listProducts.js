@@ -15,6 +15,7 @@ import {
 import { db } from "../../../config/firebase/firebase";
 import { Breadcrumb } from "antd";
 import SidebarForFilter from "@/app/components/sidebarForFilter";
+import Example from "@/app/components/sidebarForFilter";
 
 export default function ListProductsPage({ typeProp }) {
   const [productsFromDatabase, setProductsFromDatabase] = useState([]);
@@ -223,88 +224,96 @@ export default function ListProductsPage({ typeProp }) {
   });
 
   return (
-    <div className="product-page-content">
-      <Breadcrumb
-        style={{
-          margin: "16px 0",
-        }}
-      >
-        <Breadcrumb.Item>Sản phẩm</Breadcrumb.Item>
-        <Breadcrumb.Item>Xe đạp</Breadcrumb.Item>
-      </Breadcrumb>
-      <div className="filter-criteria">
-        <div className="flex flex-wrap justify-between gap-4 ">
-          <Dropdown menu={menuProps} className="mx-4">
-            <Button>
-              <Space>
-                {selectedType.label} <DownOutlined />
-              </Space>
-            </Button>
-          </Dropdown>
-          <Dropdown menu={ascOrDescProps} className="mx-4">
-            <Button>
-              <Space>
-                {selectedAscOrDesc.label} <DownOutlined />
-              </Space>
-            </Button>
-          </Dropdown>
-          <Slider
-            min={0}
-            max={100}
-            onChange={(value) => {
-              onSliderChange(value);
-            }}
-            marks={sliderMarks}
-            step={2}
-            range
-            defaultValue={[0, 100]}
-            className="w-full md:w-1/4 mx-4"
-          />
-          <div className="flex justify-center self-center sm:flex-col ">
-            <SidebarForFilter />
-            <Input.Search
-              className="w-full md:w-1/4 mx-3"
-              placeholder="Nhập tên sản phẩm..."
-              onSearch={onSearch}
-              onChange={(e) => {
-                if (e.target.value === "") {
-                  setListProduct([...productsFromDatabase]);
-                }
-              }}
-            />
-          </div>
+    //   <div className="product-page-content">
+    //     <Breadcrumb
+    //       style={{
+    //         margin: "16px 0",
+    //       }}
+    //     >
+    //       <Breadcrumb.Item>Sản phẩm</Breadcrumb.Item>
+    //       <Breadcrumb.Item>Xe đạp</Breadcrumb.Item>
+    //     </Breadcrumb>
+    //     <div className="filter-criteria">
+    //       <div className="flex flex-wrap justify-between gap-4 ">
+    //         <Dropdown menu={menuProps} className="mx-4">
+    //           <Button>
+    //             <Space>
+    //               {selectedType.label} <DownOutlined />
+    //             </Space>
+    //           </Button>
+    //         </Dropdown>
+    //         <Dropdown menu={ascOrDescProps} className="mx-4">
+    //           <Button>
+    //             <Space>
+    //               {selectedAscOrDesc.label} <DownOutlined />
+    //             </Space>
+    //           </Button>
+    //         </Dropdown>
+    //         <Slider
+    //           min={0}
+    //           max={100}
+    //           onChange={(value) => {
+    //             onSliderChange(value);
+    //           }}
+    //           marks={sliderMarks}
+    //           step={2}
+    //           range
+    //           defaultValue={[0, 100]}
+    //           className="w-full md:w-1/4 mx-4"
+    //         />
+    //         <div className="flex justify-center self-center sm:flex-col ">
+    //           <SidebarForFilter />
+    //           <Input.Search
+    //             className="w-full md:w-1/4 mx-3"
+    //             placeholder="Nhập tên sản phẩm..."
+    //             onSearch={onSearch}
+    //             onChange={(e) => {
+    //               if (e.target.value === "") {
+    //                 setListProduct([...productsFromDatabase]);
+    //               }
+    //             }}
+    //           />
+    //         </div>
+    //       </div>
+    //       <br />
+    //       <div className="flex flex-wrap justify-center">
+    //         {!productsFromDatabase.length ? (
+    //           <div className="text-center">
+    //             <p>Không có sản phẩm nào</p>
+    //           </div>
+    //         ) : (
+    //           listProduct.map((product, index) => {
+    //             return (
+    //               <div key={index} className="duration-200">
+    //                 <Product product={product} index={index} key={index} />
+    //               </div>
+    //             );
+    //           })
+    //         )}
+    //       </div>
+    //       <br />
+    //       <div className="text-center">
+    //         <Pagination
+    //           defaultCurrent={1}
+    //           pageSize={
+    //             productsFromDatabase.length % 10 === 0
+    //               ? productsFromDatabase.length / 10
+    //               : Math.floor(productsFromDatabase.length / 10) + 1
+    //           }
+    //           current={pageNumber}
+    //           total={productsFromDatabase.length}
+    //           onChange={onPagination}
+    //         />
+    //       </div>
+    //     </div>
+    //   </div>
+    // );
+    listProduct.map((product, index) => {
+      return (
+        <div key={index} className="duration-200">
+          <Product product={product} index={index} key={index} />
         </div>
-        <br />
-        <div className="flex flex-wrap justify-center">
-          {!productsFromDatabase.length ? (
-            <div className="text-center">
-              <p>Không có sản phẩm nào</p>
-            </div>
-          ) : (
-            listProduct.map((product, index) => {
-              return (
-                <div key={index} className="duration-200">
-                  <Product product={product} index={index} key={index} />
-                </div>
-              );
-            })
-          )}
-        </div>
-        <br />
-        <div className="text-center">
-          <Pagination
-            defaultCurrent={1}
-            pageSize={
-              productsFromDatabase.length % 10 === 0
-                ? productsFromDatabase.length / 10
-                : Math.floor(productsFromDatabase.length / 10) + 1
-            }
-            current={pageNumber}
-            total={productsFromDatabase.length}
-            onChange={onPagination}
-          />
-        </div>
-      </div>
-    </div>
+      );
+    })
   );
 }

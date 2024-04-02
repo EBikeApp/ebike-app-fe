@@ -244,16 +244,17 @@
 import ListProductsPage from "./listProducts";
 import { useEffect } from "react";
 import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
+import Example from "@/app/components/sidebarForFilter";
 
 export default function ProductPage({ params }) {
   useEffect(() => {
     console.log(params);
   });
   return (
-    <div>
       <div className="pt-20 w-full">
-        <ListProductsPage typeProp={params} />
+          <div className="flex flex-wrap justify-center">
+            <ListProductsPage typeProp={params} />
+          </div>
       </div>
-    </div>
   );
 }
