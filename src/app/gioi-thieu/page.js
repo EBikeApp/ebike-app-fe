@@ -3,8 +3,9 @@ import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header/Header";
 import HeaderLinks from "@/components/Header/HeaderLinks";
-import "../globals.css"
+import "../globals.css";
 import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
+import Example from "../components/test";
 export default function Home() {
   // how to get all params of endpoint
   const searchParams = useSearchParams();
@@ -20,7 +21,9 @@ export default function Home() {
         changeColorOnScroll={{ color: "white", height: 40 }}
         fixed
       />
-      <h1>Giới thiệu</h1>
+      <div>
+        <Example />
+      </div>
     </>
   );
 }

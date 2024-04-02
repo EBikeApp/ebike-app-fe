@@ -25,7 +25,10 @@ module.exports = {
     7: "71px",
   },
   theme: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+    // ...
+  ],
   important: true,
   corePlugins: {
     preflight: false,

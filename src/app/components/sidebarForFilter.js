@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Drawer, Space } from "antd";
 import { FilterOutlined } from "@ant-design/icons";
+import Example from "./test";
 
 export default function SidebarForFilter() {
   const [open, setOpen] = useState(false);
@@ -23,25 +24,25 @@ export default function SidebarForFilter() {
           <p className="font-medium w-6">Lọc</p>
         </div>
       </div>
-  <div className="w-[90%]">
-      <Drawer
-        title="Bộ Lọc Tìm Kiếm"
-        placement={placement}
-        // i want to set margin top
-        // style={{ marginTop: "75px" }}
-        style={{width: "90%"}}
-        onClose={onClose}
-        zIndex={10000}
-        open={open}
-        extra={
-          <Space>
-            <Button onClick={onClose}>Cancel</Button>
-            <Button type="primary" onClick={onClose}>
-              OK
-            </Button>
-          </Space>
-        }
-      ></Drawer>
+      <div className="w-[90%]">
+        <Drawer
+          title="Bộ Lọc Tìm Kiếm"
+          placement={placement}
+          onClose={onClose}
+          zIndex={10000}
+          width={300}
+          open={open}
+          extra={
+            <Space>
+              <Button onClick={onClose}>Cancel</Button>
+              <Button type="primary" onClick={onClose}>
+                OK
+              </Button>
+            </Space>
+          }
+        >
+          <Example />
+        </Drawer>
       </div>
     </div>
   );

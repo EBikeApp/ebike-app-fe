@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ["firebasestorage.googleapis.com"],
   },
+  compiler: {
+    emotion: true,
+  },
 };
 
 export default nextConfig;
