@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Loading from "../san-pham/[type]/loading";
+import Loading from "../../app/san-pham/[type]/loading";
 import "../globals.css";
 import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 export default function Layout({ children }) {
