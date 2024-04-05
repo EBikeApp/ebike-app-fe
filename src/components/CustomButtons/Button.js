@@ -13,7 +13,7 @@ import Button from "@material-ui/core/Button";
 import buttonStyle from "@/styles/jss/nextjs-material-kit/components/buttonStyle.js";
 
 const makeComponentStyles = makeStyles(() => ({
-  ...buttonStyle
+  ...buttonStyle,
 }));
 
 const ButtonRef = (props, ref) => {
@@ -45,14 +45,14 @@ const ButtonRef = (props, ref) => {
     [classes.block]: block,
     [classes.link]: link,
     [classes.justIcon]: justIcon,
-    [className]: className
+    [className]: className,
   });
   return (
     <Button {...rest} ref={ref} classes={{ root: btnClasses }}>
       {children}
     </Button>
   );
-}
+};
 
 const RegularButton = React.forwardRef(ButtonRef);
 
@@ -69,7 +69,7 @@ RegularButton.propTypes = {
     "twitter",
     "google",
     "github",
-    "transparent"
+    "transparent",
   ]),
   size: PropTypes.oneOf(["sm", "lg"]),
   simple: PropTypes.bool,
@@ -80,7 +80,7 @@ RegularButton.propTypes = {
   link: PropTypes.bool,
   justIcon: PropTypes.bool,
   children: PropTypes.node,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default RegularButton;

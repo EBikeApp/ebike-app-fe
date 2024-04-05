@@ -23,10 +23,13 @@ const footerStyle = {
   },
   footer: {
     padding: "0.9375rem 0",
-    textAlign: "center",
+    textAlign: "left",
     display: "flex",
     zIndex: "2",
-    position: "relative"
+    position: "relative",
+    background: "rgb(0,0,0)",
+    background: "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6728816526610644) 33%)",
+    color: "#FFFFFF !important",
   },
   a: {
     color: primaryColor,

@@ -34,6 +34,11 @@ export default function HeaderLinks(props) {
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
+        <Link href="/gioi-thieu" color="transparent" className={classes.navLink}>
+          GIỚI THIỆU
+        </Link>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           navDropdown
@@ -45,19 +50,19 @@ export default function HeaderLinks(props) {
           buttonIcon={Apps}
           dropdownList={[
             <Link href="/san-pham">
-              <div className={classes.dropdownLink}>Tất cả</div>
+              <div className={classes.dropdownLink}>TẤT CẢ</div>
             </Link>,
             <Link href="/san-pham/xe-dap">
-              <div className={classes.dropdownLink}>Xe đạp</div>
+              <div className={classes.dropdownLink}>XE ĐẠP</div>
             </Link>,
             <Link href="/san-pham/xe-dap-dien">
-              <div className={classes.dropdownLink}>Xe đạp điện</div>
+              <div className={classes.dropdownLink}>XE ĐẠP ĐIỆN</div>
             </Link>,
             <Link href="/san-pham/xe-may-dien">
-              <div className={classes.dropdownLink}>Xe máy điện</div>
+              <div className={classes.dropdownLink}>XE MÁY ĐIỆN</div>
             </Link>,
             <Link href="/san-pham/phu-kien">
-              <div className={classes.dropdownLink}>Phụ kiện</div>
+              <div className={classes.dropdownLink}>PHỤ KIỆN</div>
             </Link>,
           ]}
         />

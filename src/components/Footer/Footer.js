@@ -8,12 +8,16 @@ import classNames from "classnames";
 // material-ui core components
 import { List, ListItem, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import NavPills from "@/components/NavPills/NavPills.js";
 
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
+import LocationOn from "@material-ui/icons/LocationOn";
+import PhoneIcon from '@material-ui/icons/Phone';
+import EmailIcon from '@material-ui/icons/Email';
 
 import styles from "@/styles/jss/nextjs-material-kit/components/footerStyle.js";
+import GridContainer from "../Grid/GridContainer";
+import Link from "next/link";
 
 const useStyles = makeStyles(styles);
 
@@ -31,118 +35,84 @@ export default function Footer(props) {
   return (
     <footer className={footerClasses}>
       <div className={classes.container}>
-        <div>
-        <NavPills
-          color="primary"
-          tabs={[
-            {
-              tabButton: "THÔNG TIN LIÊN HỆ",
-              tabContent: (
-                <span>
-                  <p>
-                    Collaboratively administrate empowered markets via
-                    plug-and-play networks. Dynamically procrastinate
-                    B2C users after installed base benefits.
-                  </p>
-                  <br />
-                  <p>
-                    Dramatically visualize customer directed convergence
-                    without revolutionary ROI. Collaboratively
-                    administrate empowered markets via plug-and-play
-                    networks. Dynamically procrastinate B2C users after
-                    installed base benefits.
-                  </p>
-                  <br />
-                  <p>This is very nice.</p>
-                </span>
-              )
-            },
-            {
-              tabButton: "ĐỊA CHỈ",
-              tabContent: (
-                <span>
-                  <p>
-                    Efficiently unleash cross-media information without
-                    cross-media value. Quickly maximize timely
-                    deliverables for real-time schemas.
-                  </p>
-                  <br />
-                  <p>
-                    Dramatically maintain clicks-and-mortar solutions
-                    without functional solutions.
-                  </p>
-                </span>
-              )
-            },
-            {
-              tabButton: "Options",
-              tabContent: (
-                <span>
-                  <p>
-                    Completely synergize resource taxing relationships
-                    via premier niche markets. Professionally cultivate
-                    one-to-one customer service with robust ideas.{" "}
-                  </p>
-                  <br />
-                  <p>
-                    Dynamically innovate resource-leveling customer
-                    service for state of the art customer service.
-                  </p>
-                </span>
-              )
-            }
-          ]}
-        />
-        </div>
+        <GridContainer spacing={2}>
+          <Grid item xs={12} sm={12} md={4}>
+            <h3>CỬA HÀNG XE ĐẠP - XE ĐIỆN THANH TÙNG</h3>
+          </Grid>
+        </GridContainer>
+        <GridContainer spacing={2}>
+          <Grid item xs={12} sm={12} md={4}>
+            <p>
+              <LocationOn className="slick-icon"/>&nbsp; Chi nhánh 1: &nbsp; 17 Lê Văn Ninh, phường Trường Thọ, Tp.Thủ Đức, Tp.Hồ Chí Minh
+            </p>
+            <p>
+              <LocationOn className="slick-icon"/>&nbsp; Chi nhánh 2: &nbsp; 40 Đỗ Xuân Hợp, phường Phước Long B, Tp.Thủ Đức, Tp.Hồ Chí Minh
+            </p>
+            <p>
+              <LocationOn className="slick-icon"/>&nbsp; Chi nhánh 3: &nbsp; 76 Quốc lộ 1K, phường Linh Xuân, Tp.Thủ Đức, Tp.Hồ Chí Minh
+            </p>
+            <p>
+              <LocationOn className="slick-icon"/>&nbsp; Chi nhánh 4: &nbsp; 238 GS1, Dĩ An, Bình Dương
+            </p>
+          </Grid>
+          <Grid item xs={12} sm={12} md={4}>
+            <p className="title">THÔNG TIN LIÊN HỆ</p>
+            <p>
+              <PhoneIcon className="slick-icon"/>&nbsp; Hotline: 0903 123 456
+            </p>
+            <p>
+              <EmailIcon className="slick-icon"/>&nbsp; Email: milo.nhantran@gmail.com
+            </p>
+          </Grid>
+          <Grid item xs={12} sm={12} md={4}>
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61550772461381&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style={{border: "none", overflow: "hidden"}} scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+          </Grid>
+        </GridContainer>
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/?ref=njsmk-footer"
+              <Link
+                href="/"
                 className={classes.block}
-                target="_blank"
               >
-                Creative Tim
-              </a>
+                EBike
+              </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/presentation?ref=njsmk-footer"
+              <Link
+                href="/gioi-thieu"
                 className={classes.block}
-                target="_blank"
               >
-                About us
-              </a>
+                GIỚI THIỆU
+              </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href="http://blog.creative-tim.com/?ref=njsmk-footer"
+              <Link
+                href="/"
                 className={classes.block}
-                target="_blank"
               >
-                Blog
-              </a>
+                LIÊN HỆ
+              </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license?ref=njsmk-footer"
+              <Link
+                href="/"
                 className={classes.block}
-                target="_blank"
               >
-                Licenses
-              </a>
+                CHÍNH SÁCH
+              </Link>
             </ListItem>
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
+          &copy; 2024, made with{" "}
           <Favorite className={classes.icon} /> by{" "}
           <a
-            href="https://www.creative-tim.com?ref=njsmk-footer"
+            href="https://www.facebook.com/minh.nhan.k2"
             className={aClasses}
             target="_blank"
           >
-            Creative Tim
+            NT
           </a>{" "}
           for a better web.
         </div>

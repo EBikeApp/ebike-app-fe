@@ -20,7 +20,12 @@ import App from "next/app";
 import Head from "next/head";
 import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 import "./globals.css";
-import Layout from "./layout";
+import Layout from "@/components/Layout/layout";
+import NextNProgress from "nextjs-progressbar";
+import { Montserrat } from 'next/font/google'
+ 
+// If loading a variable font, you don't need to specify the font weight
+const monsterrat = Montserrat({ subsets: ['vietnamese'] })
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -45,7 +50,6 @@ export default class MyApp extends App {
   }
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
-
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
@@ -64,9 +68,19 @@ export default class MyApp extends App {
           />
           <title>NextJS Material Kit by Creative Tim</title>
         </Head>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <main className={monsterrat.className}>
+          <div className="bg-white">
+            <Layout>
+              <NextNProgress
+                color="#29D"
+                startPosition={0.3}
+                stopDelayMs={200}
+                height="3"
+              />
+              <Component {...pageProps} />
+            </Layout>
+          </div>
+        </main>
       </React.Fragment>
     );
   }

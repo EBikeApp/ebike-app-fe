@@ -8,15 +8,23 @@ import Link from 'next/link';
 
 const useStyles = makeStyles({
   root: {
-    width: 90,
     display: 'inline-block',
     margin: '10px',
     pointerEvents: 'cursor',
     "& div.MuiCardContent-root": {
-        padding: '8px',
-        fontWeight: 700,
+        padding: '20px',
+    },
+    "& img": {
+      background: "rgb(2,0,36)",
+      background: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,60,121,1) 35%, rgba(0,212,255,1) 100%)",
     }
   },
+  category: {
+    textAlign: 'center',
+    margin: '0px 10px',
+    fontSize: '14px',
+    // fontWeight: 400,
+  }
 });
 
 export default function CateGoryButton({url, imagePath, title, category }) {
@@ -28,15 +36,15 @@ export default function CateGoryButton({url, imagePath, title, category }) {
             <Card>
                 <CardActionArea>
                     <CardMedia
-                    component="img"
-                    alt="Contemplative Reptile"
-                    height="108"
-                    width="140"
-                    image={imagePath}
-                    title={title}
+                      component="img"
+                      alt="Contemplative Reptile"
+                      // height="108"
+                      // width="140"
+                      image={imagePath}
+                      title={title}
                     />
                     <CardContent>
-                        <p>{category}</p>  
+                        <p className={`${classes.category} __className_f3ee7c`}>{category.toUpperCase()}</p>  
                     </CardContent>
                 </CardActionArea>
             </Card>

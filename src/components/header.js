@@ -5,7 +5,7 @@ export default function HeaderComponent() {
   return (
     <Header 
       brand="EBike"
-      color="transparent"
+      color="white"
       changeColorOnScroll={{color: "white", height: 40}}
       fixed
       rightLinks={<HeaderLinks />}
