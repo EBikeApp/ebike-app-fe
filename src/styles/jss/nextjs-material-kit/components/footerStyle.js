@@ -57,6 +57,9 @@ const footerStyle = {
     height: "18px",
     position: "relative",
     top: "3px"
+  },
+  title: {
+    fontWeight: 600,
   }
 };
 export default footerStyle;

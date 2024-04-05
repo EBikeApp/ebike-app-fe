@@ -37,7 +37,7 @@ export default function Footer(props) {
       <div className={classes.container}>
         <GridContainer spacing={2}>
           <Grid item xs={12} sm={12} md={4}>
-            <h3>CỬA HÀNG XE ĐẠP - XE ĐIỆN THANH TÙNG</h3>
+            <h3 className={classes.title}>CỬA HÀNG XE ĐẠP - XE ĐIỆN THANH TÙNG</h3>
           </Grid>
         </GridContainer>
         <GridContainer spacing={2}>
