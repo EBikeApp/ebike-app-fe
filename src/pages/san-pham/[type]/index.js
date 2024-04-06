@@ -1,5 +1,4 @@
 import ListProductsPage from "@/components/ProductComponent/listProducts";
-import Example from "@/components/sidebarForFilter";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 

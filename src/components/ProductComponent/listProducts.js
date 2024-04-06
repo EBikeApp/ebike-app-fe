@@ -1,44 +1,24 @@
 "use client";
 
 import React, { useState, useCallback, useMemo, useEffect } from "react";
-// import { Dropdown, Slider, Pagination, Button, Space, Input } from "antd";
-// import { DownOutlined } from "@ant-design/icons";
 import Product from "@/components/ProductComponent/Product";
 import {
+  and,
   collection,
   getDocs,
-  limit,
+  or,
   orderBy,
   query,
   where,
 } from "firebase/firestore";
 import { db } from "@/config/firebase/firebase";
-// import { Breadcrumb } from "antd";
-// import SidebarForFilter from "@/components/sidebarForFilter";
 import Example from "@/components/sidebarForFilter";
+import Loading from "../Loading/Loading";
 
 export default function ListProductsPage({ typeProp }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [productsFromDatabase, setProductsFromDatabase] = useState([]);
   const [listProduct, setListProduct] = useState([]);
-  const [priceFilter, setPriceFilter] = useState([0, 100]);
-  const [selectedType, setSelectedType] = useState({
-    label: "Tất cả",
-    key: "all",
-  });
-
-  const [pageNumber, setPageNumber] = useState(1);
-
-  const [selectedAscOrDesc, setSelectedAscOrDesc] = useState({
-    label: "Giá",
-    key: "default",
-  });
-  const [scopeProducts, setScopeProducts] = useState({
-    start: 0,
-    end: 10,
-  });
-
-  const [brand, setBrand] = useState("ASAMA");
-  const [rangePrice, setRangePrice] = useState([0, 100]);
 
   const [path, _] = useState([
     {
@@ -61,6 +41,7 @@ export default function ListProductsPage({ typeProp }) {
   const [type, setType] = useState("");
 
   useEffect(() => {
+    setIsLoading(true);
     setType(path.find((item) => item.label === typeProp.type).type);
     const getAllDocsFromDatabase = async (type) => {
       // setIsLoading(true);
@@ -69,79 +50,20 @@ export default function ListProductsPage({ typeProp }) {
       const data = querySnapShot.docs.map((doc) => doc.data());
       return data;
     };
-    // this is the first time the component is mounted
+
     getAllDocsFromDatabase(type).then((data) => {
-      // setIsLoading(false);
+      setIsLoading(false);
+      console.log(data);
       setProductsFromDatabase(data);
-      setListProduct([...data.slice(0, 10)]);
-      setPageNumber(1);
-      setPriceFilter([0, 100]);
-      setSelectedType({
-        label: "Tất cả",
-        key: "all",
-      });
+      setListProduct([...data]);
     });
   }, [type, typeProp]);
 
   // haven't done yet
-  const onPagination = (pageNumber, pageSize) => {
-    setPageNumber(pageNumber);
-    if (pageNumber * 10 > productsFromDatabase.length) {
-      setScopeProducts({
-        start: (pageNumber - 1) * 10,
-        end: productsFromDatabase.length,
-      });
-    } else {
-      setScopeProducts({
-        start: (pageNumber - 1) * 10,
-        end: pageNumber * 10,
-      });
-    }
-
-    setListProduct([
-      ...productsFromDatabase.slice(scopeProducts.start, scopeProducts.end + 1),
-    ]);
-  };
-
-  const handleMenuClickForBrandSearching = useCallback((e) => {
-    const selected = items.find((item) => item.key === e.key);
-
-    if (selected) {
-      setSelectedType(selected);
-    }
-    if (selected.key === "all") {
-      setPriceFilter([0, 100]);
-      setListProduct([...productsFromDatabase]);
-    } else {
-      const filterProducts = productsFromDatabase.filter(
-        (product) => product.brand === selected.key
-      );
-      setPriceFilter([0, 100]);
-      setListProduct([...filterProducts]);
-    }
-  });
-
-  const onSliderChange = (value) => {
-    if (value[0] === 0) {
-      setListProduct([
-        ...productsFromDatabase.slice(
-          scopeProducts.start,
-          scopeProducts.end + 1
-        ),
-      ]);
-    } else {
-      const currentListProduct = listProduct.filter(
-        (product) =>
-          product.price <= value[1] * 1000000 &&
-          product.price >= value[0] * 1000000
-      );
-      setListProduct([...currentListProduct]);
-    }
-  };
 
   const onSearch = (value) => {
     const currentListProduct = productsFromDatabase.filter((product) =>
-      product.title.toLowerCase().includes(value.toLowerCase())
+      product.title.toLowerCase().includes(value.toLowerCase()),
     );
     setListProduct([...currentListProduct]);
   };
@@ -156,16 +78,10 @@ export default function ListProductsPage({ typeProp }) {
     .concat({
       label: "Tất cả",
       key: "all",
+    })
+    .filter((item, index, self) => {
+      return index === self.findIndex((t) => t.key === item.key);
     });
-
-  const items = setUpForBrandSearching.filter((item, index, self) => {
-    return index === self.findIndex((t) => t.key === item.key);
-  });
-
-  const menuProps = {
-    items,
-    onClick: handleMenuClickForBrandSearching,
-  };
 
   const ascOrDescProps = {
     items: [
@@ -194,141 +110,65 @@ export default function ListProductsPage({ typeProp }) {
     },
   };
 
-  const sliderMarks = useMemo(
-    () => ({
-      [priceFilter[0]]: `${priceFilter[0]}triệu`,
-      [priceFilter[1]]: `${priceFilter[1]}triệu`,
-    }),
-    [priceFilter]
-  );
+  const handleSumitFunc = async (rangePrices, selectedBrands) => {
+    const { min, max } = rangePrices;
+    console.log(typeof min, typeof max, selectedBrands);
 
-  const getData = async () => {
     try {
+      setIsLoading(true);
       const q = query(
         collection(db, "products"),
-        where("type", "==", type),
-        brand === "all" ? null : where("brand", "==", brand),
-        limit(10)
+        and(
+          where("type", "==", type),
+          rangePrices
+            ? max != "infinity"
+              ? and(where("price", ">=", min), where("price", "<=", max))
+              : where("price", ">=", min)
+            : null,
+          selectedBrands.length > 0
+            ? selectedBrands.findIndex((item) => item === "all") === -1
+              ? where("brand", "in", selectedBrands)
+              : null
+            : null,
+        ),
       );
-      const querySnapShot = await getDocs(q);
 
+      const querySnapShot = await getDocs(q);
       const data = querySnapShot.docs.map((doc) => doc.data());
-      return data;
+      console.log(data);
+      setListProduct([...data]);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error getting documents: ", error);
     }
   };
 
-  useEffect(() => {
-    getData().then((data) => console.log(data));
-  });
-
-  // return (
-  // <div className="product-page-content">
-  //   <Breadcrumb
-  //     style={{
-  //       margin: "16px 0",
-  //     }}
-  //   >
-  //     <Breadcrumb.Item>Sản phẩm</Breadcrumb.Item>
-  //     <Breadcrumb.Item>Xe đạp</Breadcrumb.Item>
-  //   </Breadcrumb>
-  //   <div className="filter-criteria">
-  //     <div className="flex flex-wrap justify-between gap-4 ">
-  //       <Dropdown menu={menuProps} className="mx-4">
-  //         <Button>
-  //           <Space>
-  //             {selectedType.label} <DownOutlined />
-  //           </Space>
-  //         </Button>
-  //       </Dropdown>
-  //       <Dropdown menu={ascOrDescProps} className="mx-4">
-  //         <Button>
-  //           <Space>
-  //             {selectedAscOrDesc.label} <DownOutlined />
-  //           </Space>
-  //         </Button>
-  //       </Dropdown>
-  //       <Slider
-  //         min={0}
-  //         max={100}
-  //         onChange={(value) => {
-  //           onSliderChange(value);
-  //         }}
-  //         marks={sliderMarks}
-  //         step={2}
-  //         range
-  //         defaultValue={[0, 100]}
-  //         className="w-full md:w-1/4 mx-4"
-  //       />
-  //       <div className="flex justify-center self-center sm:flex-col ">
-  //         <SidebarForFilter />
-  //         <Input.Search
-  //           className="w-full md:w-1/4 mx-3"
-  //           placeholder="Nhập tên sản phẩm..."
-  //           onSearch={onSearch}
-  //           onChange={(e) => {
-  //             if (e.target.value === "") {
-  //               setListProduct([...productsFromDatabase]);
-  //             }
-  //           }}
-  //         />
-  //       </div>
-  //     </div>
-  //     <br />
-  //     <div className="flex flex-wrap justify-center">
-  //       {!productsFromDatabase.length ? (
-  //         <div className="text-center">
-  //           <p>Không có sản phẩm nào</p>
-  //         </div>
-  //       ) : (
-  //         listProduct.map((product, index) => {
-  //           return (
-  //             <div key={index} className="duration-200">
-  //               <Product product={product} index={index} key={index} />
-  //             </div>
-  //           );
-  //         })
-  //       )}
-  //     </div>
-  //     <br />
-  //     <div className="text-center">
-  //       <Pagination
-  //         defaultCurrent={1}
-  //         pageSize={
-  //           productsFromDatabase.length % 10 === 0
-  //             ? productsFromDatabase.length / 10
-  //             : Math.floor(productsFromDatabase.length / 10) + 1
-  //         }
-  //         current={pageNumber}
-  //         total={productsFromDatabase.length}
-  //         onChange={onPagination}
-  //       />
-  //     </div>
-  //   </div>
-  // </div>
-
-  // );
-
   return (
     <Example
-      brands={[
-        {
-          brand: "ASAMA",
-        },
-        {
-          brand: "THỂ THAO",
-        },
-      ]}
+      brands={setUpForBrandSearching.map((item) => {
+        return {
+          label: item.label,
+          key: item.key,
+        };
+      })}
+      onSubmit={({ rangePrices, selectedBrands }) =>
+        handleSumitFunc(rangePrices, selectedBrands)
+      }
     >
       <div className="flex flex-wrap justify-center">
-        {listProduct.map((product, index) => {
-          return (
-            <div key={index} className="duration-200">
-              <Product product={product} index={index} key={index} />
-            </div>
-          );
-        })}
+        {isLoading ? (
+          <Loading />
+        ) : listProduct.length ? (
+          listProduct.map((product, index) => {
+            return (
+              <div key={index} className="duration-200">
+                <Product product={product} index={index} key={index} />
+              </div>
+            );
+          })
+        ) : (
+          <div className="font-semibold">Không tìm thấy kết quả nào</div>
+        )}
       </div>
     </Example>
   );
