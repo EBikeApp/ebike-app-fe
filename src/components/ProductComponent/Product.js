@@ -3,6 +3,7 @@ import React from "react";
 import { Badge, Card, Image } from "antd";
 import { numberToVND } from "@/config/utils/common";
 import { usePathname, useRouter } from "next/navigation";
+import Button from "@/components/CustomButtons/Button";
 const Product = ({ product, index }) => {
   const BadgeHiddenOrNot = {
     display: product.discountPercentage > 0 ? "block" : "none",
@@ -53,12 +54,9 @@ const Product = ({ product, index }) => {
                     {numberToVND(product.price)}
                   </p>
                 </div>
-                <button
-                  type="button"
-                  className="cursor-pointer rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                >
+                <Button color="info" type="button">
                   Xem chi tiết
-                </button>
+                </Button>
               </div>
             }
             style={{ height: "20%" }}
