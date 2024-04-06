@@ -16,8 +16,12 @@ const useStyles = makeStyles({
     },
     "& img": {
       background: "rgb(2,0,36)",
-      background: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,60,121,1) 35%, rgba(0,212,255,1) 100%)",
-    }
+      background: "linear-gradient(to right top, #f5f6f8, #d6efff, #a7edff, #6beaf6, #2de6d5)",
+      "&:hover": {
+        background: "linear-gradient(to right top, #f5f6f8, #b2c4f4, #7a90eb, #4a5adb, #2716c2)",
+      }
+    },
+
   },
   category: {
     textAlign: 'center',
