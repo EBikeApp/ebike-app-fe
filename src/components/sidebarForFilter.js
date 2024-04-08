@@ -299,13 +299,13 @@ export default function Example({ children, brands, onSubmit }) {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w- px-4 sm:px-6 lg:px-8">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+        <div className="mx-auto max-w- px-4 sm:px-6 lg:px-8">
+          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-right">
                 <div>
                   <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                    Sort
+                    Sắp xếp
                     <ChevronDownIcon
                       className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
@@ -365,7 +365,7 @@ export default function Example({ children, brands, onSubmit }) {
             <div className="flex gap-x-8 gap-y-10 ">
               {/* Filters */}
               <form className="hidden lg:block">
-                <h2 className="text-lg font-medium text-gray-900">Filters</h2>
+                <h2 className="text-lg font-medium text-gray-900">LỌC</h2>
                 {filters.map((section) => (
                   <Disclosure
                     as="div"
@@ -478,7 +478,7 @@ export default function Example({ children, brands, onSubmit }) {
               <div className="grow">{children}</div>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

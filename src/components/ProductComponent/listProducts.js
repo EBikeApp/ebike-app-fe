@@ -14,6 +14,8 @@ import {
 import { db } from "@/config/firebase/firebase";
 import Example from "@/components/sidebarForFilter";
 import Loading from "../Loading/Loading";
+import GridContainer from "@/components/Grid/GridContainer";
+import GridItem from "@/components/Grid/GridItem";
 
 export default function ListProductsPage({ typeProp }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -155,7 +157,22 @@ export default function ListProductsPage({ typeProp }) {
         handleSumitFunc(rangePrices, selectedBrands)
       }
     >
-      <div className="flex flex-wrap justify-center">
+      <GridContainer spacing={2}>
+        {isLoading ? (
+          <Loading />
+        ) : listProduct.length ? (
+          listProduct.map((product, index) => {
+            return (
+              <GridItem xs={6} sm={6} md={3} key={index}>
+                <Product product={product} index={index} />
+              </GridItem>
+            );
+          })
+        ) : (
+          <div className="font-semibold">Không tìm thấy kết quả nào</div>
+        )}
+      </GridContainer>
+      {/* <div className="flex flex-wrap justify-center">
         {isLoading ? (
           <Loading />
         ) : listProduct.length ? (
@@ -169,7 +186,7 @@ export default function ListProductsPage({ typeProp }) {
         ) : (
           <div className="font-semibold">Không tìm thấy kết quả nào</div>
         )}
-      </div>
+      </div> */}
     </Example>
   );
 }
