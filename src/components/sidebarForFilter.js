@@ -14,15 +14,15 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(2),
     minWidth: 120,
+    margin: '5px 20px',
     width: "80%",
     "& label, & div.MuiSelect-root, &input" : {
       fontFamily: "'__Montserrat_f3ee7c', '__Montserrat_Fallback_f3ee7c'",
     }
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  formContainer: {
+    marginRight: '20px',
   },
   fontFamily: {
     fontFamily: "'__Montserrat_f3ee7c', '__Montserrat_Fallback_f3ee7c'",
@@ -58,8 +58,8 @@ export default function Example({
         </GridItem>
 
       <GridItem xs={12} sm={12} md={2}>
-        <GridContainer spacing={2}>
-          <GridItem xs={12} sm={12} md={12}>
+        <GridContainer spacing={2} direction="row-reverse" className={classes.formContainer}>
+          <GridItem xs={4} sm={4} md={12}>
             <FormControl className={classes.formControl}>
               <InputLabel id="sort-price-label">Sắp xếp giá</InputLabel>
               <Select
@@ -76,7 +76,7 @@ export default function Example({
               </Select>
             </FormControl>
           </GridItem>
-          <GridItem xs={12} sm={12} md={12}>
+          <GridItem xs={4} sm={4} md={12}>
             <FormControl className={classes.formControl}>
               <InputLabel id="brand-label">Chọn hãng</InputLabel>
               <Select
