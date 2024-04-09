@@ -1,5 +1,11 @@
 import { db } from "@/config/firebase/firebase";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Product from "../ProductComponent/Product";
 import Carousel from "react-slick";
@@ -43,10 +49,11 @@ export default function ProductSale() {
     const q = query(
       collection(db, "products"),
       orderBy("discountPercentage", "desc"),
+      limit(6),
     );
     const querySnapshot = await getDocs(q);
     const data = querySnapshot.docs.map((doc) => doc.data());
-    setListProducts(data.slice(0, 6));
+    setListProducts(data);
   };
 
   const settings = {
