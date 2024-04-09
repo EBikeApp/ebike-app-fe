@@ -39,7 +39,7 @@ export default function ProductDetailCard({ Images, DiscountPercentage }) {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SampleNextArrow />,
     dotsClass: "slick-dots slick-thumb",
-    slidesToShow: Images >= 4 ? 4 : Images.length,
+    slidesToShow: Images.length >= 4 ? 4 : Images.length,
     slidesToScroll: 1,
     arrows: true,
   };

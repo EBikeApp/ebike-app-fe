@@ -159,7 +159,9 @@ export default function ListProductsPage({ typeProp }) {
     >
       <GridContainer spacing={2}>
         {isLoading ? (
-          <Loading />
+          <div className="m-auto">
+            <Loading />
+          </div>
         ) : listProduct.length ? (
           listProduct.map((product, index) => {
             return (
