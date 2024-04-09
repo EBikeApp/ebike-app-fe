@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Product from "@/components/ProductComponent/Product";
 import {
   and,
@@ -16,11 +16,19 @@ import Example from "@/components/sidebarForFilter";
 import Loading from "../Loading/Loading";
 import GridContainer from "@/components/Grid/GridContainer";
 import GridItem from "@/components/Grid/GridItem";
+import Pagination from "@/components/Pagination/Pagination";
 
 export default function ListProductsPage({ typeProp }) {
   const [isLoading, setIsLoading] = useState(false);
   const [productsFromDatabase, setProductsFromDatabase] = useState([]);
   const [listProduct, setListProduct] = useState([]);
+  const [pages, setPages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageData, setPageData] = useState([]);
+  const [sortPrice, setSortPrice] = useState("");
+  const [brand, setBrand] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   const [path, _] = useState([
     {
@@ -57,18 +65,42 @@ export default function ListProductsPage({ typeProp }) {
       setIsLoading(false);
       console.log(data);
       setProductsFromDatabase(data);
-      setListProduct([...data]);
     });
   }, [type, typeProp]);
 
-  // haven't done yet
+  useEffect(() => {
+    const discountedPrice = ({ price, discountPercentage }) => discountPercentage ? price - price * discountPercentage / 100 : price;
+    let sortedList = [...productsFromDatabase];
+    if (sortPrice) {
+      sortedList.sort((a, b) => sortPrice === "asc" ? discountedPrice(a) - discountedPrice(b) : discountedPrice(b) - discountedPrice(a));
+    }
+    if (searchText) {
+      sortedList = sortedList.filter((item) => item.title.toLowerCase().includes(searchText.toLowerCase()));
+    }
+    if (brand) {
+      sortedList = sortedList.filter((item) => item.brand === brand);
+    }
+    console.log(sortedList);
+    setFilteredData(sortedList);
+    if (sortedList.length) {
+      const pageSize = sortedList.length/8;
+      const listPage = [{text: "PREV", value: "PREV"}];
+      for (let i = 1; i < pageSize + 1; i++) {
+        listPage.push({text: i, value: i});
+      }
+      listPage.push({text: "NEXT", value: "NEXT"});
+      setPages(listPage);
+    } else {
+      setPages([])
+    }
+  }, [productsFromDatabase, searchText, brand, sortPrice])
 
-  const onSearch = (value) => {
-    const currentListProduct = productsFromDatabase.filter((product) =>
-      product.title.toLowerCase().includes(value.toLowerCase()),
-    );
-    setListProduct([...currentListProduct]);
-  };
+  useEffect(() => { 
+    const start = (currentPage - 1) * 8;
+    const end = currentPage * 8;
+    setListProduct([...filteredData.slice(start, end)]);
+  }, [currentPage, filteredData])
+
 
   const setUpForBrandSearching = productsFromDatabase
     .map((item) => {
@@ -85,63 +117,13 @@ export default function ListProductsPage({ typeProp }) {
       return index === self.findIndex((t) => t.key === item.key);
     });
 
-  const ascOrDescProps = {
-    items: [
-      {
-        label: "Giá tăng dần",
-        key: "asc",
-      },
-      {
-        label: "Giá giảm dần",
-        key: "desc",
-      },
-    ],
-    onClick: (e) => {
-      const selected = ascOrDescProps.items.find((item) => item.key === e.key);
-      if (selected) {
-        setSelectedAscOrDesc(selected);
-      }
-      if (selected.key === "asc") {
-        const sortedList = listProduct.sort((a, b) => a.price - b.price);
-        setListProduct([...sortedList]);
-      }
-      if (selected.key === "desc") {
-        const sortedList = listProduct.sort((a, b) => b.price - a.price);
-        setListProduct([...sortedList]);
-      }
-    },
-  };
-
-  const handleSumitFunc = async (rangePrices, selectedBrands) => {
-    const { min, max } = rangePrices;
-    console.log(typeof min, typeof max, selectedBrands);
-
-    try {
-      setIsLoading(true);
-      const q = query(
-        collection(db, "products"),
-        and(
-          where("type", "==", type),
-          rangePrices
-            ? max != "infinity"
-              ? and(where("price", ">=", min), where("price", "<=", max))
-              : where("price", ">=", min)
-            : null,
-          selectedBrands.length > 0
-            ? selectedBrands.findIndex((item) => item === "all") === -1
-              ? where("brand", "in", selectedBrands)
-              : null
-            : null,
-        ),
-      );
-
-      const querySnapShot = await getDocs(q);
-      const data = querySnapShot.docs.map((doc) => doc.data());
-      console.log(data);
-      setListProduct([...data]);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error getting documents: ", error);
+  const onPagination = (value) => {
+    if (value === "PREV") {
+      setCurrentPage(prev => prev - 1);
+    } else if (value === "NEXT") {
+    setCurrentPage(prev => prev + 1);
+    } else {
+      setCurrentPage(value);
     }
   };
 
@@ -153,14 +135,16 @@ export default function ListProductsPage({ typeProp }) {
           key: item.key,
         };
       })}
-      onSubmit={({ rangePrices, selectedBrands }) =>
-        handleSumitFunc(rangePrices, selectedBrands)
-      }
+      brand={brand}
+      setBrand={setBrand}
+      sortPrice={sortPrice}
+      setSortPrice={setSortPrice}
+      onChangeSearchBy={(e) => setSearchText(e.target.value)}
     >
       <GridContainer spacing={2}>
         {isLoading ? (
           <Loading />
-        ) : listProduct.length ? (
+        ) : filteredData.length ? (
           listProduct.map((product, index) => {
             return (
               <GridItem xs={6} sm={6} md={3} key={index}>
@@ -171,22 +155,14 @@ export default function ListProductsPage({ typeProp }) {
         ) : (
           <div className="font-semibold">Không tìm thấy kết quả nào</div>
         )}
+        <GridItem xs={12} sm={12} md={12}>
+         {pages.length ? <Pagination
+            color="info"
+            pages={pages.map(item => ({...item, active: item.value === currentPage}))}
+            onClick={onPagination}
+         /> : null}
+        </GridItem>
       </GridContainer>
-      {/* <div className="flex flex-wrap justify-center">
-        {isLoading ? (
-          <Loading />
-        ) : listProduct.length ? (
-          listProduct.map((product, index) => {
-            return (
-              <div key={index} className="duration-200">
-                <Product product={product} index={index} key={index} />
-              </div>
-            );
-          })
-        ) : (
-          <div className="font-semibold">Không tìm thấy kết quả nào</div>
-        )}
-      </div> */}
     </Example>
   );
 }

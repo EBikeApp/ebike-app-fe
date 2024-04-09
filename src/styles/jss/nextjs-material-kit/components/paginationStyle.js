@@ -7,9 +7,12 @@ import {
   warningColor,
   dangerColor,
   roseColor
-} from "/styles/jss/nextjs-material-kit.js";
+} from "@/styles/jss/nextjs-material-kit.js";
 
 const paginationStyle = {
+  root : {
+    textAlign: "center",
+  },
   pagination: {
     display: "inline-block",
     paddingLeft: "0",

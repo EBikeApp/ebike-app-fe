@@ -87,7 +87,7 @@ export default function ProductSale() {
   };
 
   return (
-    <div className="mt-14">
+    <div className="mt-14 pb-24">
       <h5 className="text-2xl font-semibold text-center">
         SẢN PHẨM KHUYẾN MÃI
       </h5>

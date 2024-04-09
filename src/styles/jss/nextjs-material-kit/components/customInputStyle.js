@@ -2,8 +2,9 @@ import {
   primaryColor,
   dangerColor,
   successColor,
-  defaultFont
-} from "/styles/jss/nextjs-material-kit.js";
+  defaultFont,
+  boxShadow
+} from "@/styles/jss/nextjs-material-kit.js";
 
 const customInputStyle = {
   disabled: {
@@ -62,20 +63,23 @@ const customInputStyle = {
     position: "relative",
     "& svg,& .fab,& .far,& .fal,& .fas,& .material-icons": {
       color: "#495057"
-    }
+    },
   },
   input: {
     color: "#495057",
     height: "unset",
     "&,&::placeholder": {
       fontSize: "14px",
-      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: "'__Montserrat_f3ee7c', '__Montserrat_Fallback_f3ee7c'",
       fontWeight: "400",
       lineHeight: "1.42857",
       opacity: "1"
     },
     "&::placeholder": {
       color: "#AAAAAA"
+    },
+    "&:focus": {
+      boxShadow: 'none',
     }
   },
   whiteInput: {

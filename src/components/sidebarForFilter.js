@@ -1,125 +1,101 @@
-import { Fragment, useEffect, useState } from "react";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import Button from "@/components/CustomButtons/Button";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  FunnelIcon,
-  MinusIcon,
-  PlusIcon,
-} from "@heroicons/react/20/solid";
-import { Filter } from "@material-ui/icons";
+import { useEffect, useState } from "react";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+import GridContainer from "@/components/Grid/GridContainer";
+import GridItem from "@/components/Grid/GridItem";
 
-export default function Example({ children, brands, onSubmit }) {
-  const [rangePrices, updateRangePrices] = useState({});
-  const [selectedBrands, setSelectedBrands] = useState([]);
+import InputAdornment from "@material-ui/core/InputAdornment";
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import CustomInput from "@/components/CustomInput/CustomInput.js";
+import SearchIcon from '@material-ui/icons/Search';
 
-  const sortOptions = [
-    { name: "Price: Low to High", href: "#", current: false },
-    { name: "Price: High to Low", href: "#", current: false },
-  ];
-
-  const [filters, setFilters] = useState([]);
-
-  useEffect(() => {
-    setFilters([
-      {
-        id: "price-range",
-        name: "Khoảng Giá",
-        options: [
-          { value: [0, 2000000], label: "Dưới 2 triệu", checked: false },
-          {
-            value: [2000000, 5000000],
-            label: "Từ 2 triệu đến 5 triệu",
-            checked: false,
-          },
-          {
-            value: [5000000, 10000000],
-            label: "Từ 5 triệu đến 10 triệu",
-            checked: false,
-          },
-          {
-            value: [10000000, "infinity"],
-            label: "Trên 10 triệu",
-            checked: false,
-          },
-        ],
-      },
-      {
-        id: "Brand",
-        name: "Thương Hiệu",
-        options: [
-          ...brands.map((item) => {
-            return {
-              value: item.key,
-              label: item.label,
-              checked: false,
-            };
-          }),
-        ],
-      },
-    ]);
-  }, [brands]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({
-      rangePrices,
-      selectedBrands,
-    });
-  };
-
-  const handleRangePricesChange = (e) => {
-    // const { value } = e.target;
-    // const [min, max] = value.split("-");
-    // updateRangePrices([min, max]);
-    const min = e.target.value.split(",")[0];
-    const max = e.target.value.split(",")[1];
-
-    if (max === "infinity") {
-      updateRangePrices({
-        min: Number(min),
-        max: max,
-      });
-      return;
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(2),
+    minWidth: 120,
+    width: "80%",
+    "& label, & div.MuiSelect-root, &input" : {
+      fontFamily: "'__Montserrat_f3ee7c', '__Montserrat_Fallback_f3ee7c'",
     }
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  fontFamily: {
+    fontFamily: "'__Montserrat_f3ee7c', '__Montserrat_Fallback_f3ee7c'",
+  }
+}));
 
-    updateRangePrices({
-      // change to number
-      min: Number(min),
-      max: Number(max),
-    });
-  };
-
-  const handleClickBrand = (e) => {
-    const { value } = e.target;
-    console.log(value);
-    if (e.target.checked) {
-      setSelectedBrands([...selectedBrands, value]);
-    } else {
-      setSelectedBrands(selectedBrands.filter((item) => item !== value));
-    }
-  };
-
-  useEffect(() => {
-    console.log(rangePrices);
-  }, [rangePrices]);
-
-  useEffect(() => {
-    console.log(selectedBrands);
-  }, [selectedBrands]);
-
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+export default function Example({ 
+  children,
+  brands,
+  sortPrice,
+  setSortPrice,
+  brand,
+  setBrand,
+  onChangeSearchBy,
+}) {
+  const classes = useStyles();
 
   return (
-    <div className="bg-white">
-      <div>
+    <GridContainer>
+      <GridItem xs={12} sm={12} md={12}>
+          <CustomInput
+              color="inherit"
+              labelText="Tìm kiếm theo tên sản phẩm"
+              id="material"
+              formControlProps={{
+                  style: { width: '300px', color: '#3f51b5', float: 'right', marginRight: '20px'},
+              }}
+              inputProps={{
+                  endAdornment: (<InputAdornment position="end"><SearchIcon/></InputAdornment>),
+                  onChange: onChangeSearchBy,
+              }}
+          />
+        </GridItem>
+
+      <GridItem xs={12} sm={12} md={2}>
+        <GridContainer spacing={2}>
+          <GridItem xs={12} sm={12} md={12}>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="sort-price-label">Sắp xếp giá</InputLabel>
+              <Select
+                labelId="sort-price-label"
+                id="demo-simple-select-outlined"
+                value={sortPrice}
+                onChange={(e) => setSortPrice(e.target.value)}
+              >
+                <MenuItem value="" className={classes.fontFamily}>
+                  <em>Bỏ chọn</em>
+                </MenuItem>
+                <MenuItem value="asc" className={classes.fontFamily}>Thấp đến cao</MenuItem>
+                <MenuItem value="desc" className={classes.fontFamily}>Cao đến thấp</MenuItem>
+              </Select>
+            </FormControl>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={12}>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="brand-label">Chọn hãng</InputLabel>
+              <Select
+                labelId="brand-label"
+                id="demo-simple-select-outlined"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+              >
+                {[{ value: "", label: <em>Bỏ chọn</em> }, ...brands].map((item) => (
+                  <MenuItem value={item.key} key={item.key} className={classes.fontFamily}>
+                    {item.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </GridItem>
+        </GridContainer>
         {/* Mobile filter dialog */}
-        <Transition.Root show={mobileFiltersOpen} as={Fragment}>
+        {/* <Transition.Root show={mobileFiltersOpen} as={Fragment}>
           <Dialog
             as="div"
             className="relative z-40 lg:hidden"
@@ -160,7 +136,7 @@ export default function Example({ children, brands, onSubmit }) {
                     </button>
                   </div>
 
-                  {/* Filters */}
+                  {/* Filters
                   <form className="mt-4 border-t border-gray-200">
                     <h4 className="font-bold ml-2 flex gap-2">
                       <span>
@@ -297,9 +273,9 @@ export default function Example({ children, brands, onSubmit }) {
               </Transition.Child>
             </div>
           </Dialog>
-        </Transition.Root>
+        </Transition.Root> */}
 
-        <div className="mx-auto max-w- px-4 sm:px-6 lg:px-8">
+        {/* <div className="mx-auto max-w- px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-right">
@@ -363,7 +339,6 @@ export default function Example({ children, brands, onSubmit }) {
             </h2>
 
             <div className="flex gap-x-8 gap-y-10 ">
-              {/* Filters */}
               <form className="hidden lg:block">
                 <h2 className="text-lg font-medium text-gray-900">LỌC</h2>
                 {filters.map((section) => (
@@ -473,13 +448,11 @@ export default function Example({ children, brands, onSubmit }) {
                   </Button>
                 </div>
               </form>
-
-              {/* Product grid */}
-              <div className="grow">{children}</div>
             </div>
           </section>
-        </div>
-      </div>
-    </div>
+        </div> */}
+      </GridItem>
+      <GridItem xs={12} sm={12} md={10}>{children}</GridItem>
+    </GridContainer>
   );
 }

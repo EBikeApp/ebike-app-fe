@@ -21,7 +21,6 @@ const useStyles = makeStyles({
         background: "linear-gradient(to right top, #f5f6f8, #b2c4f4, #7a90eb, #4a5adb, #2716c2)",
       }
     },
-
   },
   category: {
     textAlign: 'center',

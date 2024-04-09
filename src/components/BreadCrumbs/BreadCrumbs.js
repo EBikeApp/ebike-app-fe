@@ -42,14 +42,13 @@ export default function PageBreadCrumbs({ router }) {
 
   return (
     <Breadcrumbs aria-label="breadcrumb" className={classes.root}>
-      <Link color="inherit" href="/" onClick={handleClick} className={classes.link}>
+      <Link color="inherit" href="/" className={classes.link}>
         <HomeIcon className={classes.icon} />
         TRANG CHỦ
       </Link>
       <Link
         color="inherit"
-        href="/getting-started/installation/"
-        onClick={handleClick}
+        href="/san-pham"
         className={classes.link}
       >
         SẢN PHẨM
