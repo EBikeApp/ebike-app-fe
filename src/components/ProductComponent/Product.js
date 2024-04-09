@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import { Card, CardActionArea, CardMedia, CardContent, Chip } from "@material-ui/core";
 import { numberToVND } from "@/config/utils/common";
 import { usePathname, useRouter } from "next/navigation";
@@ -48,14 +48,21 @@ const Product = ({ product, index }) => {
   const BadgeHiddenOrNot = {
     display: product.discountPercentage > 0 ? "block" : "none",
   };
-  const pathname = usePathname();
+  const typeToPath = {
+      bicycle: "xe-dap",
+      eBike: "xe-dap-dien",
+      eMotobike: "xe-may-dien",
+      fitting: "phu-kien",
+  };
   const router = useRouter();
-
+  const href = useMemo(() => `/san-pham/${typeToPath[product.type]}/${product.id}`, 
+  [product.id, product.type]
+);
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Link href={`${pathname}/${product.id}`}>
+      <Link href={href}>
         <Card>
             <CardActionArea>
                 <CardMedia

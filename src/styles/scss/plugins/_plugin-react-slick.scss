@@ -173,7 +173,7 @@ button.slick-arrow.slick-next {
   }
 }
 .slick-next {
-  right: 0;
+  right: 0!important;
   &::before {
     content: "\f054";
     font-weight: 600;

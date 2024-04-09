@@ -67,6 +67,7 @@ export default function Example({
                 id="demo-simple-select-outlined"
                 value={sortPrice}
                 onChange={(e) => setSortPrice(e.target.value)}
+                color="#d500f9"
               >
                 <MenuItem value="" className={classes.fontFamily}>
                   <em>Bỏ chọn</em>

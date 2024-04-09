@@ -30,7 +30,7 @@ export default function ListProductsPage({ typeProp }) {
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
-  const [path, _] = useState([
+  const path = [
     {
       label: "xe-dap",
       type: "bicycle",
@@ -47,7 +47,7 @@ export default function ListProductsPage({ typeProp }) {
       label: "phu-kien",
       type: "fitting",
     },
-  ]);
+  ];
   const [type, setType] = useState("");
 
   useEffect(() => {
