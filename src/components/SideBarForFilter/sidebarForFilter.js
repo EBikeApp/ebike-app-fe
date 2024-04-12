@@ -150,6 +150,7 @@ export default function Example({ children, brands }) {
                                       defaultChecked={option.checked}
                                       className="h-4 w-4 p-2 rounded border-gray-500 border-2 border-solid text-indigo-600 focus:ring-indigo-500"
                                       onClick={() => {
+                                        console.log(section.id);
                                         const newFilters = filters.map(
                                           (filter) => {
                                             if (filter.id === section.id) {
@@ -166,12 +167,12 @@ export default function Example({ children, brands }) {
                                                       };
                                                     }
                                                     return opt;
-                                                  },
+                                                  }
                                                 ),
                                               };
                                             }
                                             return filter;
-                                          },
+                                          }
                                         );
                                         setFilters(newFilters);
                                       }}
@@ -232,7 +233,7 @@ export default function Example({ children, brands }) {
                                   ? "font-medium text-gray-900"
                                   : "text-gray-500",
                                 active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm",
+                                "block px-4 py-2 text-sm"
                               )}
                             >
                               {option.name}
@@ -307,6 +308,7 @@ export default function Example({ children, brands }) {
                                   defaultChecked={option.checked}
                                   className="h-4 w-4 rounded border-gray-300 border-solid text-indigo-600 focus:ring-indigo-500"
                                   onClick={() => {
+                                    console.log(section.id);
                                     const newFilters = filters.map((filter) => {
                                       if (filter.id === section.id) {
                                         return {
