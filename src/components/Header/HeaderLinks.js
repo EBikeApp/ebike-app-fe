@@ -24,7 +24,7 @@ import styles from "@/styles/jss/nextjs-material-kit/components/headerLinksStyle
 
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks(props) {
+export default function HeaderLinks({ length }) {
   const classes = useStyles();
   return (
     <List className={classes.list}>
@@ -34,7 +34,11 @@ export default function HeaderLinks(props) {
         </Link>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Link href="/gioi-thieu" color="transparent" className={classes.navLink}>
+        <Link
+          href="/gioi-thieu"
+          color="transparent"
+          className={classes.navLink}
+        >
           GIỚI THIỆU
         </Link>
       </ListItem>
@@ -69,12 +73,21 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Link href="/gio-hang" color="transparent" className={classes.navLink}>
-          <ShoppingCartIcon
-            className={classes.icons}
-            style={{
-              maxWidth: "20px",
-            }}
-          />{" "}
+          <div className="relative">
+            <ShoppingCartIcon
+              className={classes.icons}
+              style={{
+                maxWidth: "20px",
+              }}
+            />{" "}
+            <span
+              className="bg-[#39f]  px-1 text-white 
+           rounded-full absolute top-0 right-0 translate-x-1 -translate-y-3 transform font-semibold
+            "
+            >
+              {length}
+            </span>
+          </div>
           Giỏ hàng
         </Link>
       </ListItem>

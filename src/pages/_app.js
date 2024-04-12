@@ -71,17 +71,17 @@ export default class MyApp extends App {
         </Head>
         <main className={monsterrat.className}>
           <div className="bg-white">
-            <Layout>
-              <NextNProgress
-                color="#29D"
-                startPosition={0.3}
-                stopDelayMs={200}
-                height="3"
-              />
-              <ProductsCartProvider>
+            <ProductsCartProvider>
+              <Layout>
+                <NextNProgress
+                  color="#29D"
+                  startPosition={0.3}
+                  stopDelayMs={200}
+                  height="3"
+                />
                 <Component {...pageProps} />
-              </ProductsCartProvider>
-            </Layout>
+              </Layout>
+            </ProductsCartProvider>
           </div>
         </main>
       </React.Fragment>
