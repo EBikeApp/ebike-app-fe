@@ -4,32 +4,32 @@ import GridContainer from "@/components/Grid/GridContainer";
 import GridItem from "@/components/Grid/GridItem";
 
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import CustomInput from "@/components/CustomInput/CustomInput.js";
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 120,
-    margin: '5px 20px',
+    margin: "5px 20px",
     width: "80%",
-    "& label, & div.MuiSelect-root, &input" : {
+    "& label, & div.MuiSelect-root, &input": {
       fontFamily: "'__Montserrat_f3ee7c', '__Montserrat_Fallback_f3ee7c'",
-    }
+    },
   },
   formContainer: {
-    marginRight: '20px',
+    marginRight: "20px",
   },
   fontFamily: {
     fontFamily: "'__Montserrat_f3ee7c', '__Montserrat_Fallback_f3ee7c'",
-  }
+  },
 }));
 
-export default function Example({ 
+export default function Example({
   children,
   brands,
   sortPrice,
@@ -41,62 +41,86 @@ export default function Example({
   const classes = useStyles();
 
   return (
-    <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
+    <div className="">
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
           <CustomInput
-              color="inherit"
-              labelText="Tìm kiếm theo tên sản phẩm"
-              id="material"
-              formControlProps={{
-                  style: { width: '300px', color: '#3f51b5', float: 'right', marginRight: '20px'},
-              }}
-              inputProps={{
-                  endAdornment: (<InputAdornment position="end"><SearchIcon/></InputAdornment>),
-                  onChange: onChangeSearchBy,
-              }}
+            color="inherit"
+            labelText="Tìm kiếm theo tên sản phẩm"
+            id="material"
+            formControlProps={{
+              style: {
+                width: "300px",
+                color: "#3f51b5",
+                float: "right",
+                marginRight: "20px",
+              },
+            }}
+            inputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              onChange: onChangeSearchBy,
+            }}
           />
         </GridItem>
 
-      <GridItem xs={12} sm={12} md={2}>
-        <GridContainer spacing={2} direction="row-reverse" className={classes.formContainer}>
-          <GridItem xs={4} sm={4} md={12}>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="sort-price-label">Sắp xếp giá</InputLabel>
-              <Select
-                labelId="sort-price-label"
-                id="demo-simple-select-outlined"
-                value={sortPrice}
-                onChange={(e) => setSortPrice(e.target.value)}
-                color="#d500f9"
-              >
-                <MenuItem value="" className={classes.fontFamily}>
-                  <em>Bỏ chọn</em>
-                </MenuItem>
-                <MenuItem value="asc" className={classes.fontFamily}>Thấp đến cao</MenuItem>
-                <MenuItem value="desc" className={classes.fontFamily}>Cao đến thấp</MenuItem>
-              </Select>
-            </FormControl>
-          </GridItem>
-          <GridItem xs={4} sm={4} md={12}>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="brand-label">Chọn hãng</InputLabel>
-              <Select
-                labelId="brand-label"
-                id="demo-simple-select-outlined"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              >
-                {[{ value: "", label: <em>Bỏ chọn</em> }, ...brands].map((item) => (
-                  <MenuItem value={item.key} key={item.key} className={classes.fontFamily}>
-                    {item.label}
+        <GridItem xs={12} sm={12} md={2}>
+          <GridContainer
+            spacing={2}
+            direction="row-reverse"
+            className={classes.formContainer}
+          >
+            <GridItem xs={4} sm={4} md={12}>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="sort-price-label">Sắp xếp giá</InputLabel>
+                <Select
+                  labelId="sort-price-label"
+                  id="demo-simple-select-outlined"
+                  value={sortPrice}
+                  onChange={(e) => setSortPrice(e.target.value)}
+                  color="#d500f9"
+                >
+                  <MenuItem value="" className={classes.fontFamily}>
+                    <em>Bỏ chọn</em>
                   </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </GridItem>
-        </GridContainer>
-        {/* Mobile filter dialog */}
-        {/* <Transition.Root show={mobileFiltersOpen} as={Fragment}>
+                  <MenuItem value="asc" className={classes.fontFamily}>
+                    Thấp đến cao
+                  </MenuItem>
+                  <MenuItem value="desc" className={classes.fontFamily}>
+                    Cao đến thấp
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </GridItem>
+            <GridItem xs={4} sm={4} md={12}>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="brand-label">Chọn hãng</InputLabel>
+                <Select
+                  labelId="brand-label"
+                  id="demo-simple-select-outlined"
+                  value={brand}
+                  onChange={(e) => setBrand(e.target.value)}
+                >
+                  {[{ value: "", label: <em>Bỏ chọn</em> }, ...brands].map(
+                    (item) => (
+                      <MenuItem
+                        value={item.key}
+                        key={item.key}
+                        className={classes.fontFamily}
+                      >
+                        {item.label}
+                      </MenuItem>
+                    ),
+                  )}
+                </Select>
+              </FormControl>
+            </GridItem>
+          </GridContainer>
+          {/* Mobile filter dialog */}
+          {/* <Transition.Root show={mobileFiltersOpen} as={Fragment}>
           <Dialog
             as="div"
             className="relative z-40 lg:hidden"
@@ -276,7 +300,7 @@ export default function Example({
           </Dialog>
         </Transition.Root> */}
 
-        {/* <div className="mx-auto max-w- px-4 sm:px-6 lg:px-8">
+          {/* <div className="mx-auto max-w- px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
             <div className="flex items-center">
               <Menu as="div" className="relative inline-block text-right">
@@ -396,7 +420,6 @@ export default function Example({
                                     }
                                   }}
                                   onClick={() => {
-                                    console.log(section.id);
                                     const newFilters = filters.map((filter) => {
                                       if (filter.id === section.id) {
                                         return {
@@ -452,8 +475,11 @@ export default function Example({
             </div>
           </section>
         </div> */}
-      </GridItem>
-      <GridItem xs={12} sm={12} md={10}>{children}</GridItem>
-    </GridContainer>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={10}>
+          {children}
+        </GridItem>
+      </GridContainer>
+    </div>
   );
 }

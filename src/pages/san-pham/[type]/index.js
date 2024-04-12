@@ -8,9 +8,6 @@ import ProductPageLayout from "@/components/ProductLayout/ProductLayout";
 export default function ProductPage() {
   const router = useRouter();
 
-  useEffect(() => {
-    console.log(router.query.type);
-  });
   return (
     <ProductPageLayout>
       <PageBreadCrumbs router={router.query.type}/>

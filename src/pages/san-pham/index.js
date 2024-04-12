@@ -1,10 +1,5 @@
-import ListProductsPage from "@/components/ProductComponent/listProducts";
-import { useRouter } from "next/router";
+import React from "react";
 
 export default function AllProducts() {
-  const router = useRouter;
-  return (
-    <div className="mt-16">
-    </div>
-  );
+  return <div></div>;
 }

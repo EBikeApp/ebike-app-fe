@@ -54,7 +54,7 @@ export default function CartComponent() {
       product: (
         <div className="flex flex-col justify-start leading-3">
           <div className="w-[100px] my-2">
-            <Image src={product.thumbnail} className="w-full" />
+            <Image src={product.thumbnail[0]} className="w-full" />
           </div>
           <p className="leading-5">Tên: {product.title}</p>
           <div className="flex flex-col">
@@ -65,7 +65,7 @@ export default function CartComponent() {
               <p className=" line-through text-gray-700 -mt-1">
                 {numberToVND(
                   product.price +
-                    (product.price * product.discountPercentage) / 100
+                    (product.price * product.discountPercentage) / 100,
                 )}
               </p>
             )}
@@ -94,38 +94,6 @@ export default function CartComponent() {
           </div>
         </div>
       ),
-      // price: (
-      //   <Typography.Paragraph>
-      //     {numberToVND(product.price)}{" "}
-      //     {product.discountPercentage > 0 && (
-      //       <Typography.Text delete type="danger">
-      //         {numberToVND(
-      //           product.price +
-      //             (product.price * product.discountPercentage) / 100
-      //         )}
-      //       </Typography.Text>
-      //     )}
-      //   </Typography.Paragraph>
-      // ),
-      // quantity: (
-      //   <div className="flex flex-col">
-      //     <Button
-      //       onClick={() => {
-      //         updateCart(product.id, quantity - 1);
-      //       }}
-      //     >
-      //       -
-      //     </Button>
-      //     <Typography.Text>{quantity}</Typography.Text>
-      //     <Button
-      //       onClick={() => {
-      //         updateCart(product.id, quantity + 1);
-      //       }}
-      //     >
-      //       +
-      //     </Button>
-      //   </div>
-      // ),
       total: <p>{numberToVND(product.price * quantity)}</p>,
       delete: (
         <Button
@@ -155,14 +123,14 @@ export default function CartComponent() {
             if (
               !customerNameRef.current.input?.value.trim() ||
               !checkNumberPhoneIsValid(
-                customerNumberPhoneRef.current.input?.value.trim()
+                customerNumberPhoneRef.current.input?.value.trim(),
               )
             ) {
               alert("Xin mời nhập đầy đủ thông tin!");
             } else {
               pay(
                 customerNameRef.current.input.value.trim(),
-                customerNumberPhoneRef.current.input?.value.trim()
+                customerNumberPhoneRef.current.input?.value.trim(),
               );
               handleOk();
             }
@@ -213,7 +181,7 @@ export default function CartComponent() {
                       return Promise.resolve();
                     }
                     return Promise.reject(
-                      new Error("Số điện thoại không hợp lệ!")
+                      new Error("Số điện thoại không hợp lệ!"),
                     );
                   },
                 },

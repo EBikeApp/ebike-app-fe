@@ -10,7 +10,7 @@ import { ProductsCartContext } from "@/store/products-cart-context";
 import Loading from "../Loading/Loading";
 
 export default function ProductDetail({ productId }) {
-  const { addToCart, items } = useContext(ProductsCartContext);
+  const { addToCart } = useContext(ProductsCartContext);
 
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState();
@@ -37,9 +37,8 @@ export default function ProductDetail({ productId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addToCart(product.product, e.target[0].value, product.url);
+    addToCart(product, e.target[0].value);
     openNotification("Thông Báo", "Thêm vào giỏ hàng thành công");
-    console.log(items);
   };
 
   return isLoading ? (
@@ -86,7 +85,7 @@ export default function ProductDetail({ productId }) {
                 className="w-1/3 block border border-gray-300 p-2 rounded-md"
               />
               <button
-                type="button"
+                type="submit"
                 className="rounded-md bg-blue-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 Thêm vào giỏ hàng

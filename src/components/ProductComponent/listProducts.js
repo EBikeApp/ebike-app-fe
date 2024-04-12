@@ -63,44 +63,48 @@ export default function ListProductsPage({ typeProp }) {
 
     getAllDocsFromDatabase(type).then((data) => {
       setIsLoading(false);
-      console.log(data);
       setProductsFromDatabase(data);
     });
   }, [type, typeProp]);
 
   useEffect(() => {
-    const discountedPrice = ({ price, discountPercentage }) => discountPercentage ? price - price * discountPercentage / 100 : price;
+    const discountedPrice = ({ price, discountPercentage }) =>
+      discountPercentage ? price - (price * discountPercentage) / 100 : price;
     let sortedList = [...productsFromDatabase];
     if (sortPrice) {
-      sortedList.sort((a, b) => sortPrice === "asc" ? discountedPrice(a) - discountedPrice(b) : discountedPrice(b) - discountedPrice(a));
+      sortedList.sort((a, b) =>
+        sortPrice === "asc"
+          ? discountedPrice(a) - discountedPrice(b)
+          : discountedPrice(b) - discountedPrice(a),
+      );
     }
     if (searchText) {
-      sortedList = sortedList.filter((item) => item.title.toLowerCase().includes(searchText.toLowerCase()));
+      sortedList = sortedList.filter((item) =>
+        item.title.toLowerCase().includes(searchText.toLowerCase()),
+      );
     }
     if (brand) {
       sortedList = sortedList.filter((item) => item.brand === brand);
     }
-    console.log(sortedList);
     setFilteredData(sortedList);
     if (sortedList.length) {
-      const pageSize = sortedList.length/8;
-      const listPage = [{text: "PREV", value: "PREV"}];
+      const pageSize = sortedList.length / 8;
+      const listPage = [{ text: "PREV", value: "PREV" }];
       for (let i = 1; i < pageSize + 1; i++) {
-        listPage.push({text: i, value: i});
+        listPage.push({ text: i, value: i });
       }
-      listPage.push({text: "NEXT", value: "NEXT"});
+      listPage.push({ text: "NEXT", value: "NEXT" });
       setPages(listPage);
     } else {
-      setPages([])
+      setPages([]);
     }
-  }, [productsFromDatabase, searchText, brand, sortPrice])
+  }, [productsFromDatabase, searchText, brand, sortPrice]);
 
-  useEffect(() => { 
+  useEffect(() => {
     const start = (currentPage - 1) * 8;
     const end = currentPage * 8;
     setListProduct([...filteredData.slice(start, end)]);
-  }, [currentPage, filteredData])
-
+  }, [currentPage, filteredData]);
 
   const setUpForBrandSearching = productsFromDatabase
     .map((item) => {
@@ -119,9 +123,9 @@ export default function ListProductsPage({ typeProp }) {
 
   const onPagination = (value) => {
     if (value === "PREV") {
-      setCurrentPage(prev => prev - 1);
+      setCurrentPage((prev) => prev - 1);
     } else if (value === "NEXT") {
-    setCurrentPage(prev => prev + 1);
+      setCurrentPage((prev) => prev + 1);
     } else {
       setCurrentPage(value);
     }
@@ -143,7 +147,9 @@ export default function ListProductsPage({ typeProp }) {
     >
       <GridContainer spacing={2}>
         {isLoading ? (
-          <Loading />
+          <div className="m-auto">
+            <Loading />
+          </div>
         ) : filteredData.length ? (
           listProduct.map((product, index) => {
             return (
@@ -156,11 +162,16 @@ export default function ListProductsPage({ typeProp }) {
           <div className="font-semibold">Không tìm thấy kết quả nào</div>
         )}
         <GridItem xs={12} sm={12} md={12}>
-         {pages.length ? <Pagination
-            color="info"
-            pages={pages.map(item => ({...item, active: item.value === currentPage}))}
-            onClick={onPagination}
-         /> : null}
+          {pages.length ? (
+            <Pagination
+              color="info"
+              pages={pages.map((item) => ({
+                ...item,
+                active: item.value === currentPage,
+              }))}
+              onClick={onPagination}
+            />
+          ) : null}
         </GridItem>
       </GridContainer>
     </Example>

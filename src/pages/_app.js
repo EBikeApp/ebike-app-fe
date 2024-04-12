@@ -22,10 +22,11 @@ import "@/styles/scss/nextjs-material-kit.scss?v=1.2.0";
 import "./globals.css";
 import Layout from "@/components/Layout/layout";
 import NextNProgress from "nextjs-progressbar";
-import { Montserrat } from 'next/font/google'
- 
+import { Montserrat } from "next/font/google";
+import ProductsCartProvider from "@/store/products-cart-context";
+
 // If loading a variable font, you don't need to specify the font weight
-const monsterrat = Montserrat({ subsets: ['vietnamese'] })
+const monsterrat = Montserrat({ subsets: ["vietnamese"] });
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -77,7 +78,9 @@ export default class MyApp extends App {
                 stopDelayMs={200}
                 height="3"
               />
-              <Component {...pageProps} />
+              <ProductsCartProvider>
+                <Component {...pageProps} />
+              </ProductsCartProvider>
             </Layout>
           </div>
         </main>
