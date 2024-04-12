@@ -67,7 +67,6 @@ export default function Example({
           />
         </GridItem>
 
-<<<<<<< HEAD
         <GridItem xs={12} sm={12} md={2}>
           <GridContainer
             spacing={2}
@@ -86,39 +85,6 @@ export default function Example({
                 >
                   <MenuItem value="" className={classes.fontFamily}>
                     <em>Bỏ chọn</em>
-=======
-      <GridItem xs={12} sm={12} md={2}>
-        <GridContainer spacing={2} direction="row-reverse" className={classes.formContainer}>
-          <GridItem xs={4} sm={4} md={12}>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="sort-price-label">Sắp xếp giá</InputLabel>
-              <Select
-                labelId="sort-price-label"
-                id="demo-simple-select-outlined"
-                value={sortPrice}
-                onChange={(e) => setSortPrice(e.target.value)}
-              >
-                <MenuItem value="" className={classes.fontFamily}>
-                  <em>Bỏ chọn</em>
-                </MenuItem>
-                <MenuItem value="asc" className={classes.fontFamily}>Thấp đến cao</MenuItem>
-                <MenuItem value="desc" className={classes.fontFamily}>Cao đến thấp</MenuItem>
-              </Select>
-            </FormControl>
-          </GridItem>
-          <GridItem xs={4} sm={4} md={12}>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="brand-label">Chọn hãng</InputLabel>
-              <Select
-                labelId="brand-label"
-                id="demo-simple-select-outlined"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              >
-                {[{ value: "", label: <em>Bỏ chọn</em> }, ...brands].map((item) => (
-                  <MenuItem value={item.key} key={item.key} className={classes.fontFamily}>
-                    {item.label}
->>>>>>> 5dc5f8bba2198089492b9f9973f47380eb95de81
                   </MenuItem>
                   <MenuItem value="asc" className={classes.fontFamily}>
                     Thấp đến cao
@@ -147,7 +113,7 @@ export default function Example({
                       >
                         {item.label}
                       </MenuItem>
-                    ),
+                    )
                   )}
                 </Select>
               </FormControl>
