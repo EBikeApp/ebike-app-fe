@@ -37,6 +37,7 @@ const headerLinksStyle = (theme) => ({
     padding: "0 !important"
   },
   navLink: {
+    fontFamily: "'__Montserrat_f3ee7c', '__Montserrat_Fallback_f17ee7c'",
     color: "inherit",
     position: "relative",
     padding: "0.9375rem",
@@ -58,6 +59,16 @@ const headerLinksStyle = (theme) => ({
       marginBottom: "8px",
       marginTop: "8px",
       textAlign: "left",
+      "& > span:first-child": {
+        justifyContent: "flex-start"
+      }
+    }
+  },
+  cartLink: {
+    [theme.breakpoints.down("sm")]: {
+      width: "auto",
+      textAlign: "left",
+      paddingRight: "30px",
       "& > span:first-child": {
         justifyContent: "flex-start"
       }

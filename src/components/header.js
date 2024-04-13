@@ -1,14 +1,15 @@
 import React from "react";
-import HeaderLinks from "@/components/Header/HeaderLinks";
+import HeaderLinks, { ShoppingCart } from "@/components/Header/HeaderLinks";
 import Header from "@/components/Header/Header";
-export default function HeaderComponent({ length }) {
+export default function HeaderComponent() {
   return (
     <Header
       brand="EBike"
       color="white"
       changeColorOnScroll={{ color: "white", height: 40 }}
       fixed
-      rightLinks={<HeaderLinks length={length} />}
+      rightLinks={<HeaderLinks />}
+      cart={<ShoppingCart />}
     />
   );
 }
