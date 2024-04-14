@@ -13,6 +13,7 @@ import Link from "next/link";
 const styles = {
   cardTitle,
   root: {
+    width: '100%',
     display: 'inline-block',
     margin: '10px',
     pointerEvents: 'cursor',

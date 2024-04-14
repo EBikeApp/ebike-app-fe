@@ -17,7 +17,14 @@ import Loading from "../Loading/Loading";
 import GridContainer from "@/components/Grid/GridContainer";
 import GridItem from "@/components/Grid/GridItem";
 import Pagination from "@/components/Pagination/Pagination";
+import { makeStyles } from "@material-ui/core";
 
+const useStyle = makeStyles({
+  listProductGrid: {
+    width: 'calc(100% + 16px)',
+    paddingLeft: '15px',
+  }
+});
 export default function ListProductsPage({ typeProp }) {
   const [isLoading, setIsLoading] = useState(false);
   const [productsFromDatabase, setProductsFromDatabase] = useState([]);
@@ -29,6 +36,7 @@ export default function ListProductsPage({ typeProp }) {
   const [brand, setBrand] = useState("");
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const classes = useStyle();
 
   const path = [
     {
@@ -89,11 +97,11 @@ export default function ListProductsPage({ typeProp }) {
     setFilteredData(sortedList);
     if (sortedList.length) {
       const pageSize = sortedList.length / 8;
-      const listPage = [{ text: "PREV", value: "PREV" }];
+      const listPage = [{ text: "<", value: "PREV" }];
       for (let i = 1; i < pageSize + 1; i++) {
         listPage.push({ text: i, value: i });
       }
-      listPage.push({ text: "NEXT", value: "NEXT" });
+      listPage.push({ text: ">", value: "NEXT" });
       setPages(listPage);
     } else {
       setPages([]);
@@ -123,9 +131,10 @@ export default function ListProductsPage({ typeProp }) {
 
   const onPagination = (value) => {
     if (value === "PREV") {
-      setCurrentPage((prev) => prev - 1);
+      setCurrentPage((prev) => prev == 1 ? prev : prev - 1);
     } else if (value === "NEXT") {
-      setCurrentPage((prev) => prev + 1);
+      console.log(pages);
+      setCurrentPage((prev) => prev == pages.length - 2 ? prev : prev + 1);
     } else {
       setCurrentPage(value);
     }
@@ -145,7 +154,7 @@ export default function ListProductsPage({ typeProp }) {
       setSortPrice={setSortPrice}
       onChangeSearchBy={(e) => setSearchText(e.target.value)}
     >
-      <GridContainer spacing={2}>
+      <GridContainer spacing={2} className={classes.listProductGrid}>
         {isLoading ? (
           <div className="m-auto">
             <Loading />

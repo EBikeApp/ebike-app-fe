@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import PageBreadCrumbs from "@/components/BreadCrumbs/BreadCrumbs";
 import ListProductsPage from "@/components/ProductComponent/listProducts";
 import { useRouter } from "next/router";

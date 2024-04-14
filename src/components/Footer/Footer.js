@@ -58,10 +58,13 @@ export default function Footer(props) {
           <Grid item xs={12} sm={12} md={4}>
             <p className="title">THÔNG TIN LIÊN HỆ</p>
             <p>
-              <PhoneIcon className="slick-icon"/>&nbsp; Hotline: 0903 123 456
+              <PhoneIcon className="slick-icon"/>&nbsp; Hotline:&nbsp; 0906 151 057
             </p>
             <p>
-              <EmailIcon className="slick-icon"/>&nbsp; Email: milo.nhantran@gmail.com
+              <PhoneIcon className="slick-icon"/>&nbsp; Hỗ trợ kỹ thuật/đặt hàng:&nbsp; 0906 151 057
+            </p>
+            <p>
+              <EmailIcon className="slick-icon"/>&nbsp; Email:&nbsp; thanhtungbicycle@gmail.com
             </p>
           </Grid>
           <Grid item xs={12} sm={12} md={4}>

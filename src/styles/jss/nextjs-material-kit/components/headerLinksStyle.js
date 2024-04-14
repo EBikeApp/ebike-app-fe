@@ -66,6 +66,7 @@ const headerLinksStyle = (theme) => ({
   },
   cartLink: {
     [theme.breakpoints.down("sm")]: {
+      display: "inline",
       width: "auto",
       textAlign: "left",
       paddingRight: "30px",

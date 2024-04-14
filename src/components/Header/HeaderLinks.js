@@ -12,7 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import { Apps } from "@material-ui/icons";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { ProductsCartContext } from "@/store/products-cart-context";
-
+import Badge from '@material-ui/core/Badge';
 
 // core components
 import CustomDropdown from "@/components/CustomDropdown/CustomDropdown.js";
@@ -26,22 +26,15 @@ export const ShoppingCart = () => {
   const { items } = useContext(ProductsCartContext);
   return (
         <Link href="/gio-hang" color="transparent" className={`${classes.navLink} ${classes.cartLink}`}>
-          <div className="relative">
+          <Badge badgeContent={items.length.toString()} color="secondary">
             <ShoppingCartIcon
               className={classes.icons}
               style={{
                 maxWidth: "20px",
               }}
-            />{" "}
-            <span
-              className="bg-[#39f]  px-1 text-white 
-           rounded-full absolute top-0 right-0 translate-x-1 -translate-y-3 transform font-semibold
-            "
-            >
-              {items.length}
-            </span>
-          </div>
-          Giỏ hàng
+            />
+          </Badge>
+          &nbsp; Giỏ hàng
       </Link>
   );
 }
@@ -75,9 +68,6 @@ export default function HeaderLinks() {
           }}
           buttonIcon={Apps}
           dropdownList={[
-            <Link href="/san-pham">
-              <div className={classes.dropdownLink}>TẤT CẢ</div>
-            </Link>,
             <Link href="/san-pham/xe-dap">
               <div className={classes.dropdownLink}>XE ĐẠP</div>
             </Link>,

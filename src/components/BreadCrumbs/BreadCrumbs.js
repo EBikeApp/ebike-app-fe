@@ -48,7 +48,6 @@ export default function PageBreadCrumbs({ router }) {
       </Link>
       <Link
         color="inherit"
-        href="/san-pham"
         className={classes.link}
       >
         SẢN PHẨM
