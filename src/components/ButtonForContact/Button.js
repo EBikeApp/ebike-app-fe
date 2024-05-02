@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 export default function ButtonForContactUs() {
+  const tiktokLogo = "https://hanayuki.com.vn/images/tiktok.png";
+
   return (
     <div className="flex flex-col items-center gap-2">
       <Link target="_blank" href="https://www.facebook.com/profile.php?id=61550772461381&ref=embed_page">
@@ -25,6 +27,15 @@ export default function ButtonForContactUs() {
         <div className="bg-sky-500 inline-block rounded-full w-11 h-11 p-2">
           <img
             src="https://hanayuki.com.vn/images/zalo.png"
+            alt="hanayuki"
+            className="w-full"
+          />
+        </div>
+      </Link>
+      <Link target="_blank" href="https://www.tiktok.com/@xedap_xedien_thanhtung?_t=8m0hDEdT65y&_r=1">
+        <div className="bg-sky-500 inline-block rounded-full w-11 h-11 p-2">
+          <img
+            src="https://hanayuki.com.vn/images/tiktok.png"
             alt="hanayuki"
             className="w-full"
           />
