@@ -3,7 +3,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Product from "../ProductComponent/Product";
 import Carousel from "react-slick";
-import "@/pages/styles";
+// import "@/pages/styles";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (

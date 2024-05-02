@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import styles from "@/pages/styles.js";
+import styles from "@/styles/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@/components/CustomButtons/Button.js";
 import CategoryButton from "@/pages/CategoryButton";
