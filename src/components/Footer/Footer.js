@@ -43,32 +43,32 @@ export default function Footer(props) {
         <GridContainer spacing={2}>
           <Grid item xs={12} sm={12} md={4}>
             <p>
-              <LocationOn className="slick-icon"/>&nbsp; Chi nhánh 1: &nbsp; 17 Lê Văn Ninh, phường Trường Thọ, Tp.Thủ Đức, Tp.Hồ Chí Minh
+              <LocationOn className="slick-icon" />&nbsp; Chi nhánh 1: &nbsp; 17 Lê Văn Ninh, phường Linh Tây, Tp.Thủ Đức, Tp.Hồ Chí Minh
             </p>
             <p>
-              <LocationOn className="slick-icon"/>&nbsp; Chi nhánh 2: &nbsp; 40 Đỗ Xuân Hợp, phường Phước Long B, Tp.Thủ Đức, Tp.Hồ Chí Minh
+              <LocationOn className="slick-icon" />&nbsp; Chi nhánh 2: &nbsp; 40 Đỗ Xuân Hợp, phường Phước Long B, Tp.Thủ Đức, Tp.Hồ Chí Minh
             </p>
             <p>
-              <LocationOn className="slick-icon"/>&nbsp; Chi nhánh 3: &nbsp; 76 Quốc lộ 1K, phường Linh Xuân, Tp.Thủ Đức, Tp.Hồ Chí Minh
+              <LocationOn className="slick-icon" />&nbsp; Chi nhánh 3: &nbsp; 76 Quốc lộ 1K, phường Linh Xuân, Tp.Thủ Đức, Tp.Hồ Chí Minh
             </p>
             <p>
-              <LocationOn className="slick-icon"/>&nbsp; Chi nhánh 4: &nbsp; 238 GS1, Dĩ An, Bình Dương
+              <LocationOn className="slick-icon" />&nbsp; Chi nhánh 4: &nbsp; 238 GS1, Dĩ An, Bình Dương
             </p>
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
             <p className="title">THÔNG TIN LIÊN HỆ</p>
             <p>
-              <PhoneIcon className="slick-icon"/>&nbsp; Hotline:&nbsp; 0906 151 057
+              <PhoneIcon className="slick-icon" />&nbsp; Hotline:&nbsp; 0974294781 (Nhi)
             </p>
             <p>
-              <PhoneIcon className="slick-icon"/>&nbsp; Hỗ trợ kỹ thuật/đặt hàng:&nbsp; 0906 151 057
+              <PhoneIcon className="slick-icon" />&nbsp; Hỗ trợ kỹ thuật/đặt hàng:&nbsp; 0974294781 (Nhi)
             </p>
             <p>
-              <EmailIcon className="slick-icon"/>&nbsp; Email:&nbsp; thanhtungbicycle@gmail.com
+              <EmailIcon className="slick-icon" />&nbsp; Email:&nbsp; thanhtungbicycle@gmail.com
             </p>
           </Grid>
           <Grid item xs={12} sm={12} md={4}>
-            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61550772461381&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="400" style={{border: "none", overflow: "hidden"}} scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61550772461381&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="400" style={{ border: "none", overflow: "hidden" }} scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
           </Grid>
         </GridContainer>
         <div className={classes.left}>
