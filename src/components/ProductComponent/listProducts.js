@@ -23,6 +23,7 @@ const useStyle = makeStyles({
   listProductGrid: {
     width: 'calc(100% + 16px)',
     paddingLeft: '15px',
+    marginRight: '0px',
   }
 });
 export default function ListProductsPage({ typeProp }) {
