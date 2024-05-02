@@ -5,10 +5,10 @@ import ButtonForContactUs from "../ButtonForContact/Button";
 export default function Layout({ children }) {
   return (
     <div className="">
-      <Header/>
+      <Header />
       {children}
       <Footer />
-      <div className="fixed bottom-9 left-2 z-20">
+      <div className="fixed bottom-9 right-2 z-20">
         <ButtonForContactUs />
       </div>
     </div>
