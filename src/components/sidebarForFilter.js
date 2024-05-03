@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import GridContainer from "@/components/Grid/GridContainer";
 import GridItem from "@/components/Grid/GridItem";
 

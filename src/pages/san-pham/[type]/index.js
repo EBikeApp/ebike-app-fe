@@ -9,12 +9,14 @@ export default function ProductPage() {
 
   return (
     <ProductPageLayout>
-      <PageBreadCrumbs router={router.query.type}/>
-      <ListProductsPage
-        typeProp={{
-          type: router.query.type,
-        }}
-      />
-      </ProductPageLayout>
+      <PageBreadCrumbs router={router.query.type} />
+      <div className="w-full overflow-hidden">
+        <ListProductsPage
+          typeProp={{
+            type: router.query.type,
+          }}
+        />
+      </div>
+    </ProductPageLayout>
   );
 }
