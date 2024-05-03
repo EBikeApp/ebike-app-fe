@@ -4,7 +4,7 @@ import ButtonForContactUs from "../ButtonForContact/Button";
 
 export default function Layout({ children }) {
   return (
-    <div className="">
+    <div className="w-full">
       <Header />
       {children}
       <Footer />
