@@ -18,7 +18,7 @@ const styles = {
     margin: '10px',
     pointerEvents: 'cursor',
     "& div.MuiCardContent-root": {
-        padding: '20px 0',
+      padding: '20px 0',
     },
     " & img": {
       height: "180px",
@@ -50,49 +50,56 @@ const Product = ({ product, index }) => {
     display: product.discountPercentage > 0 ? "block" : "none",
   };
   const typeToPath = {
-      bicycle: "xe-dap",
-      eBike: "xe-dap-dien",
-      eMotobike: "xe-may-dien",
-      fitting: "phu-kien",
+    bicycle: "xe-dap",
+    eBike: "xe-dap-dien",
+    eMotobike: "xe-may-dien",
+    fitting: "phu-kien",
   };
   const router = useRouter();
-  const href = useMemo(() => `/san-pham/${typeToPath[product.type]}/${product.id}`, 
-  [product.id, product.type]
-);
+  const href = useMemo(() => `/san-pham/${typeToPath[product.type]}/${product.id}`,
+    [product.id, product.type]
+  );
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Link href={href}>
         <Card>
-            <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  image={product.thumbnail[0]}
-                  title={product.title}
-                />
-                <CardContent>
-                    {
-                      product. discountPercentage ? 
-                      (<Chip
-                        className={classes.discountPercentage}
-                        icon={<LoyaltyIcon />}
-                        label={`Giảm ${product.discountPercentage}%`}
-                        color="secondary"
-                      />) : null
-                    }
-                    <p className={`${classes.category} __className_f3ee7c`}>
-                      {product?.title}
-                    </p>  
-                    <p className={`${classes.price} __className_f3ee7c`}>
-                      {numberToVND(
-                                  product.price -
-                                    (product.price * product.discountPercentage) / 100,
-                      )}
-                    </p>
-                </CardContent>
-            </CardActionArea>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              alt="Contemplative Reptile"
+              image={product.thumbnail[0]}
+              title={product.title}
+            />
+            <CardContent>
+              {
+                product.discountPercentage ?
+                  (<Chip
+                    className={classes.discountPercentage}
+                    icon={<LoyaltyIcon />}
+                    label={`Giảm ${product.discountPercentage}%`}
+                    color="secondary"
+                  />) : null
+              }
+              <p className={`${classes.category} __className_f3ee7c`}>
+                {product?.title}
+              </p>
+              <div className="flex flex-col md:flex-row">
+                <p className={`${classes.price} __className_f3ee7c`}>
+                  {numberToVND(
+                    product.price)}
+                </p>
+                <p className="font-semibold line-through text-red-600 ml-3 md:m-0">
+                  {
+                    product.discountPercentage > 0 && (
+                      numberToVND(product.price + product.price * product.discountPercentage / 100)
+                    )
+                  }
+                </p>
+              </div>
+            </CardContent>
+          </CardActionArea>
         </Card>
       </Link>
     </div>
