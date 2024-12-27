@@ -21,5 +21,6 @@ const homePageStyles = {
         fontSize: '24px',
         fontWeight: '500',
     }
+
 };
 export default homePageStyles;

@@ -9,7 +9,7 @@ export default function ButtonForContactUs() {
         <div className="bg-sky-500 inline-block rounded-full w-11 h-11 p-2">
           <img
             src="https://hanayuki.com.vn/images/icon-facebook.png"
-            alt="hanayuki"
+            alt="facebook"
             className="w-full"
           />
         </div>
@@ -18,7 +18,7 @@ export default function ButtonForContactUs() {
         <div className="bg-sky-500 inline-block rounded-full w-11 h-11 p-2">
           <img
             src="https://hanayuki.com.vn/images/ic-messenger.png"
-            alt="hanayuki"
+            alt="messenger"
             className="w-full"
           />
         </div>
@@ -27,7 +27,7 @@ export default function ButtonForContactUs() {
         <div className="bg-sky-500 inline-block rounded-full w-11 h-11 p-2">
           <img
             src="https://hanayuki.com.vn/images/zalo.png"
-            alt="hanayuki"
+            alt="zalo"
             className="w-full"
           />
         </div>
@@ -36,7 +36,7 @@ export default function ButtonForContactUs() {
         <div className="bg-sky-500 inline-block rounded-full w-11 h-11 p-2">
           <img
             src="https://hanayuki.com.vn/images/tiktok.png"
-            alt="hanayuki"
+            alt="tiktok"
             className="w-full"
           />
         </div>
@@ -46,7 +46,7 @@ export default function ButtonForContactUs() {
           <div className="bg-sky-500 inline-block rounded-full w-11 h-11 p-2">
             <img
               src="https://hanayuki.com.vn/images/icon-call.png"
-              alt="hanayuki"
+              alt="Phone"
               className="w-full"
             />
           </div>

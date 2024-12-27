@@ -1,6 +1,5 @@
 "use client";
-/*eslint-disable*/
-import React from "react";
+/*eslint-disable*/ import React from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // nodejs library that concatenates classes
@@ -11,7 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
-import LocationOn from "@material-ui/icons/LocationOn";
+// import LocationOn from "@material-ui/icons/LocationOn";
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 
@@ -40,39 +39,44 @@ export default function Footer(props) {
             <h3 className={classes.title}>CỬA HÀNG XE ĐẠP - XE ĐIỆN THANH TÙNG</h3>
           </Grid>
         </GridContainer>
-        <GridContainer spacing={2}>
-          <Grid item xs={12} sm={12} md={4}>
-            <p>
-              <LocationOn className="slick-icon" />&nbsp; Chi nhánh 1: &nbsp; 17 Lê Văn Ninh, phường Linh Tây, Tp.Thủ Đức, Tp.Hồ Chí Minh
-            </p>
-            <p>
-              <LocationOn className="slick-icon" />&nbsp; Chi nhánh 2: &nbsp; 40 Đỗ Xuân Hợp, phường Phước Long B, Tp.Thủ Đức, Tp.Hồ Chí Minh
-            </p>
-            <p>
-              <LocationOn className="slick-icon" />&nbsp; Chi nhánh 3: &nbsp; 76 Quốc lộ 1K, phường Linh Xuân, Tp.Thủ Đức, Tp.Hồ Chí Minh
-            </p>
-            <p>
-              <LocationOn className="slick-icon" />&nbsp; Chi nhánh 4: &nbsp; 238 GS1, Dĩ An, Bình Dương
-            </p>
-          </Grid>
+        {
+          // <GridContainer spacing={2}>
+          // <Grid item xs={12} sm={12} md={4}>
+          //   <p>
+          //     <LocationOn className="slick-icon" />&nbsp; Chi nhánh 1: &nbsp; 17 Lê Văn Ninh, phường Linh Tây, Tp.Thủ Đức, Tp.Hồ Chí Minh
+          //   </p>
+          //   <p>
+          //     <LocationOn className="slick-icon" />&nbsp; Chi nhánh 2: &nbsp; 40 Đỗ Xuân Hợp, phường Phước Long B, Tp.Thủ Đức, Tp.Hồ Chí Minh
+          //   </p>
+          //   <p>
+          //     <LocationOn className="slick-icon" />&nbsp; Chi nhánh 3: &nbsp; 76 Quốc lộ 1K, phường Linh Xuân, Tp.Thủ Đức, Tp.Hồ Chí Minh
+          //   </p>
+          //   <p>
+          //     <LocationOn className="slick-icon" />&nbsp; Chi nhánh 4: &nbsp; 238 GS1, Dĩ An, Bình Dương
+          //   </p>
+          // </Grid>
+          //</GridContainer>
+        }
+        <div className="flex items-center flex-col md:flex-row md:justify-between md:items-start">
           <Grid item xs={12} sm={12} md={4}>
             <p className="title">THÔNG TIN LIÊN HỆ</p>
             <p>
-              <PhoneIcon className="slick-icon" />&nbsp; Hotline:&nbsp; 0974294781 (Nhi)
-            </p>
+              <PhoneIcon className="slick-icon" />&nbsp; Hotline:&nbsp; 0974294781            </p>
+            {
+              // <p>
+              //   <PhoneIcon className="slick-icon" />&nbsp; Hỗ trợ kỹ thuật/đặt hàng:&nbsp; 0974294781 (Nhi)
+              // </p>
+            }
             <p>
-              <PhoneIcon className="slick-icon" />&nbsp; Hỗ trợ kỹ thuật/đặt hàng:&nbsp; 0974294781 (Nhi)
-            </p>
-            <p>
-              <EmailIcon className="slick-icon" />&nbsp; Email:&nbsp; thanhtungbicycle@gmail.com
-            </p>
+              <EmailIcon className="slick-icon" />&nbsp; Email:&nbsp;congtytnhhtmdvthanhtung@gmail.com            </p>
           </Grid>
+
           <Grid item xs={12} sm={12} md={4}>
             <div className="overflow-x-auto">
               <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61550772461381&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="400" style={{ border: "none", overflow: "hidden" }} scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
             </div>
           </Grid>
-        </GridContainer>
+        </div>
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>

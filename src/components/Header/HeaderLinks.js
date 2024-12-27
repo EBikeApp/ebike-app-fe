@@ -25,17 +25,17 @@ export const ShoppingCart = () => {
   const classes = useStyles();
   const { items } = useContext(ProductsCartContext);
   return (
-        <Link href="/gio-hang" color="transparent" className={`${classes.navLink} ${classes.cartLink}`}>
-          <Badge badgeContent={items.length.toString()} color="secondary">
-            <ShoppingCartIcon
-              className={classes.icons}
-              style={{
-                maxWidth: "20px",
-              }}
-            />
-          </Badge>
-          &nbsp; Giỏ hàng
-      </Link>
+    <Link href="/gio-hang" color="transparent" className={`${classes.navLink} ${classes.cartLink}`}>
+      <Badge badgeContent={items.length.toString()} color="secondary">
+        <ShoppingCartIcon
+          className={classes.icons}
+          style={{
+            maxWidth: "20px",
+          }}
+        />
+      </Badge>
+      &nbsp; Giỏ hàng
+    </Link>
   );
 }
 

@@ -1,16 +1,16 @@
 "use client";
 import React, { createContext, useEffect, useReducer } from "react";
 import { db } from "../config/firebase/firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { notification } from "antd";
 
 const ProductsCartContext = createContext({
   items: [],
-  addToCart: () => {},
-  removeFromCart: () => {},
-  updateCart: () => {},
-  clearCart: () => {},
-  pay: () => {},
+  addToCart: () => { },
+  removeFromCart: () => { },
+  updateCart: () => { },
+  clearCart: () => { },
+  pay: () => { },
 });
 
 const actions = {
@@ -172,7 +172,7 @@ const ProductsCartProvider = ({ children }) => {
     });
   };
 
-  const removeFromCart = (productId) => {};
+  const removeFromCart = (productId) => { };
 
   const updateCart = (productId, quantity) => {
     dispatch({
@@ -181,7 +181,7 @@ const ProductsCartProvider = ({ children }) => {
     });
   };
 
-  const clearCart = () => {};
+  const clearCart = () => { };
 
   const pay = (customerName, customerNumberPhone) => {
     dispatch({

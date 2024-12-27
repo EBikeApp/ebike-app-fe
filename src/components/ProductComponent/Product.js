@@ -2,7 +2,6 @@
 import React, { useMemo } from "react";
 import { Card, CardActionArea, CardMedia, CardContent, Chip } from "@material-ui/core";
 import { numberToVND } from "@/config/utils/common";
-import { usePathname, useRouter } from "next/navigation";
 import { makeStyles } from "@material-ui/core/styles";
 
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
@@ -55,7 +54,6 @@ const Product = ({ product, index }) => {
     eMotobike: "xe-may-dien",
     fitting: "phu-kien",
   };
-  const router = useRouter();
   const href = useMemo(() => `/san-pham/${typeToPath[product.type]}/${product.id}`,
     [product.id, product.type]
   );
