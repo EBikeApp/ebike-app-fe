@@ -21,7 +21,7 @@ const ProductPrice = ({ product }) => {
   };
 
   return (
-    <div className="">
+    <div className="ml-2">
       <div className="min-h-5 font-bold text-[#262626] mt-6 ">
         <p className="text-3xl">{product.title}</p>
       </div>
